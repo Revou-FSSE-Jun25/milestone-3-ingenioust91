@@ -29,10 +29,7 @@ function Fetch() {
     },[])
 
     useEffect(()=>{
-        text.split('p', {
-  chars: { class: 'split-char' },
-});
-
+        text.split('p', {chars: { class: 'split-char' },});
 
         animate('.split-char', {
         y: ['0rem', '-1rem', '0rem'],
@@ -42,11 +39,9 @@ function Fetch() {
     },[])
     
     if (loading) return (
-        <>
         <div className="flex flex-col justify-center items-center">
             <p className="text-xl">LOADING...</p>
         </div>
-        </>
     )
     
     if (error) return <div>Error: {error}</div>;
