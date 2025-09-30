@@ -12,11 +12,11 @@ export default function Card({id, title, price, images }: CardProps) {
   const [current, setCurrent] = useState(0);
   
     const nextImage = () => {
-      setCurrent((prev) => (prev + 1) % images.length);
+      setCurrent((prev) => (prev + 1) % images.length); //supaya bisa balik ke 0 kalau udah sampai di imagelength
     };
   
     const prevImage = () => {
-      setCurrent((prev) => (prev - 1 + images.length) % images.length);
+      setCurrent((prev) => (prev - 1 + images.length) % images.length); //supaya bisa balik ke imagelength kalau sudah 0
     };
   
 

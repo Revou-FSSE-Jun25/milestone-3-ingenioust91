@@ -1,10 +1,13 @@
 import React from 'react'
+import Link from "next/link";
 
 function Header() {
   return (
     <header className='flex flex-row w-full h-[6%] lg:h-[12%] p-[2%] lg:p-[1%] justify-between fixed top-0 right-0 left-0 bg-white z-999'>
-        <img className='max-h-[100%] lg:h-auto' src="/img/revoshop-02.png" alt="logo-RevoShop" title='logo-RevoShop'/>
-        
+        <a href='/'>
+          <img className='max-h-[100%] lg:h-auto' src="/img/revoshop-02.png" alt="logo-RevoShop" title='logo-RevoShop'/>
+        </a>
+
         <ul className='hidden w-[50%] lg:flex flex-row gap-[3%] justify-center items-center'>
           <li>All Items</li>
           <li>Clothes</li>

@@ -1,13 +1,14 @@
 import React from 'react'
+import Link from "next/link";
 
 function Footer() {
   return (
     <section id="connectSection" className="flex flex-col gap-y-2 w-full bg-black text-white p-[4%] lg:p-[2%_8%]">
       <div className='flex flex-row justify-between items-center'>
           <ul className='flex flex-row gap-4'>
-            <li><a>FAQ</a></li>
-            <li><a>About Us</a></li>
-            <li><a>Privacy Policy</a></li>
+            <li><a href='/policy'>FAQ</a></li>
+            <li><a href='/policy'>About Us</a></li>
+            <li><a href='/policy'>Privacy Policy</a></li>
             <li><a>Contact Us</a></li>
           </ul>
 
