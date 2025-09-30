@@ -3,8 +3,16 @@
 import React, {useEffect, useState} from 'react';
 import { animate, stagger, text } from 'animejs';
 
-function Fetch() {
-    const [data, setData] = useState([]);
+type Item = {
+    id : number;
+    title : string;
+    price : number;
+    description : string;
+    images : string[]
+}
+
+function Fetch({ children }: { children: (data: Item[]) => React.ReactNode }) {
+    const [data, setData] = useState<Item[]>([]);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
 
@@ -12,7 +20,7 @@ function Fetch() {
         setLoading(true);    // Set loading to true before fetching
         setError(null);      // Clear any previous errors
         try{
-            const response = await fetch('https://api.escuelajs.co/api/v1/products')
+            const response = await fetch('https://api.escuelajs.co/api/v1/products?offset=0&limit=12')
             const result = await response.json();
             setData(result)
         }
@@ -47,7 +55,7 @@ function Fetch() {
     if (error) return <div>Error: {error}</div>;
 
   return (
-    <div>FETCHING</div>
+    <div>{children(data)}</div>
   )
 }
 
