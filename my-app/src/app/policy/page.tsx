@@ -1,10 +1,8 @@
-import Header from '@/components/Header'
 import React from 'react'
 
 function PolicyPage() {
   return (
     <>
-    <Header />
     <div className='lg:p-[1%_7%] mt-[12%] lg:mt-[7%]'>
         <h1 className='text-2xl text-center h-[10%]'><strong>Privacy Policy</strong></h1>
         <br/>
