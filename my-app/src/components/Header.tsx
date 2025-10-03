@@ -1,14 +1,34 @@
 "use client"
+import { searchbyTitle } from "@/lib/api";
 import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import ProductList from "./productList";
+import { useState } from "react";
+
+type SearchForm = {
+  searchQuery : string;
+}
 
 function Header() {
   const router = useRouter();
+  const { register, handleSubmit, reset } = useForm<SearchForm>();
+  const [searchProducts, setSearchProducts] = useState([])
+
   const handleClick = (slug:string) =>
   { 
     if (slug=="all"){
       router.push(`/`)
     } else
     {router.push(`/productCategory/${slug}`)}
+  }
+
+  const onSubmitFunction = async (data:SearchForm) => {
+    try {
+      const searchFetch = await searchbyTitle(data.searchQuery)
+      setSearchProducts(searchFetch);
+      reset();
+    } catch (e) {}
+    
   }
 
   return (
@@ -26,12 +46,19 @@ function Header() {
           <li onClick={()=>{handleClick("electronics")}}>Electronics</li>
         </ul>
 
-        <div className='flex flex-row gap-[2%] w-[50%] lg:w-[30%] right-0 lg:w-[20%]'>
-            <input className="m-[2%_0%] bg-gray-200" type="search"/>
-            <img src ="/img/search.png"/>
+        <div className='flex flex-row gap-[2%] w-[50%] lg:w-[25%] right-0 justify-end'>
+          <form onSubmit={handleSubmit(onSubmitFunction)} className="w-[75%]">
+            <input className="h-[70%] w-[75%] pl-[2%] bg-gray-200" type="search" placeholder="SEARCH"
+            {...register("searchQuery", {
+              required : "searchQuery required",
+            })}
+            />
+            <button className="w-[22%]" type="submit"><img className="inline-block" src ="/img/search.png"/></button>
+          </form>
           <img src ="/img/cart.png"/>
         </div>
     </header>
+    <ProductList initialProducts={searchProducts} />
     </>
   )
 }
