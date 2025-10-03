@@ -6,11 +6,12 @@ function Footer() {
   const router = useRouter();
   return (
     <section id="connectSection" className="flex flex-col gap-y-2 w-full bg-black text-white p-[4%] lg:p-[2%_8%]">
-      <div className='flex flex-row justify-between items-center'>
-          <ul className='flex flex-row gap-4'>
+      <div className='flex flex-col lg:flex-row justify-between items-center'>
+          <ul className='flex flex-col lg:flex-row gap-2 lg:gap-4 text-center'>
             <li><a onClick={() => router.push("/policy")}>FAQ</a></li>
             <li><a onClick={() => router.push("/policy")}>About Us</a></li>
             <li><a onClick={() => router.push("/policy")}>Privacy Policy</a></li>
+            <li><a onClick={() => router.push("/admin")}>Admin Panel</a></li>
             <li><a>Contact Us</a></li>
           </ul>
 

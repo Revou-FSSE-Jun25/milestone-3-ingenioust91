@@ -1,9 +1,6 @@
 "use client"
-import { searchbyTitle } from "@/lib/api";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
-import ProductList from "./productList";
-import { useState } from "react";
 
 type SearchForm = {
   searchQuery : string;
@@ -12,7 +9,6 @@ type SearchForm = {
 function Header() {
   const router = useRouter();
   const { register, handleSubmit, reset } = useForm<SearchForm>();
-  const [searchProducts, setSearchProducts] = useState([])
 
   const handleClick = (slug:string) =>
   { 
@@ -24,8 +20,7 @@ function Header() {
 
   const onSubmitFunction = async (data:SearchForm) => {
     try {
-      const searchFetch = await searchbyTitle(data.searchQuery)
-      setSearchProducts(searchFetch);
+      router.push(`/productSearch/${data.searchQuery}`)
       reset();
     } catch (e) {}
     
@@ -58,7 +53,6 @@ function Header() {
           <img src ="/img/cart.png"/>
         </div>
     </header>
-    <ProductList initialProducts={searchProducts} />
     </>
   )
 }
