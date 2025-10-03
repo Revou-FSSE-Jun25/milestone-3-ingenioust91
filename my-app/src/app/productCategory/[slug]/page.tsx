@@ -1,7 +1,7 @@
 "use client"
 import React, {useState, useEffect} from 'react'
-import Card from './Card';
-import Header from './Header';
+import Card from '@/components/Card';
+import { categoryFetch } from '@/lib/api';
 
 type items = {
     id : number;
@@ -10,16 +10,21 @@ type items = {
     images : string[];
 }
 
-interface ProductListProps {
-  initialProducts: items[];
+interface Params {
+  slug : string;
 }
 
-function ProductList({initialProducts}:ProductListProps) {
+function ProductList({ params }: { params: Promise<Params> }) {
+    const { slug } = React.use(params); // unwrap params
     const [items, setItems] = useState<items[]>([]);
     
     useEffect(()=>{
-      setItems(initialProducts)
-    },[initialProducts])
+      async function fetchProduct() {
+            const data = await categoryFetch(slug);
+            setItems(data);
+          }
+          fetchProduct();
+    },[])
     
     
   return (

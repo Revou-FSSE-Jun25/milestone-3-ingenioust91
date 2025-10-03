@@ -1,12 +1,15 @@
 "use client"
 import React, { useEffect, useState } from 'react';
-import { getProducts } from '@/lib/api';
+import { getProduct } from '@/lib/api';
 
 type items = {
   id: number;
   title: string;
   price: number;
   images: string[];
+  category : {
+    slug : string;
+  };
   description : string;
 }
 
@@ -21,7 +24,7 @@ function ProductDetailPage({ params }: { params: Promise<Params> }) {
 
   useEffect(() => {
     async function fetchProduct() {
-      const data = await getProducts(id);
+      const data = await getProduct(id);
       setProduct(data);
     }
     fetchProduct();
@@ -39,7 +42,7 @@ function ProductDetailPage({ params }: { params: Promise<Params> }) {
   
   return (
     <>
-    <section className="flex flex-col lg:flex-row w-full pt-[20%] lg:pt-[8%] p-[5%] justify-center">
+    <section className="flex flex-col lg:flex-row w-full h-[75%] p-[2%_5%] justify-center">
       {/* product container */}
       <section className="lg:w-[40%] relative">
         <img src={product.images[current]} alt={product.title} />
@@ -48,14 +51,18 @@ function ProductDetailPage({ params }: { params: Promise<Params> }) {
       </section>
 
       {/* product detail */}
-      <section className="flex flex-col gap-[5px] lg:gap-[30px] lg:w-[50%] p-[5%]">
+      <section className="flex flex-col gap-[5px] lg:gap-[30px] lg:w-[50%] p-[1%_5%]">
         <div>
-          <h1 className="text-xl">Product ID : {product.id}</h1>
+          <h1 className="text-base">Product ID : {product.id}</h1>
+          <h2 className="text-base">Category : {product.category.slug}</h2>
+        </div>
+
+        <div>
           <h2 className="text-3xl"><b>{product.title}</b></h2>
           <h3 className="text-3xl">{product.price}</h3>
         </div>
 
-      <p>{product.description}</p>
+        <p>{product.description}</p>
 
         <button className="w-full h-[50px] bg-black text-white text-xl">Add to Cart</button>
       </section>

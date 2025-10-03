@@ -1,4 +1,4 @@
-import { firstFetch } from "@/lib/api";
+import { getProducts } from "@/lib/api";
 import ProductList from "@/components/productList";
 
 type Cat = {
@@ -6,10 +6,9 @@ type Cat = {
 }
 
 export default async function Home() {
-  const initialProducts = await firstFetch();
+  const initialProducts = await getProducts();
   return (
     <>
-    <div className="mt-[12%] lg:mt-[7%]"></div>
     <ProductList initialProducts={initialProducts} />
     </>
   );
