@@ -1,6 +1,7 @@
 "use client"
 import React, { useEffect, useState } from 'react';
 import { getProduct } from '@/lib/api';
+import ButtonAddToCart from '@/components/ButtonAddToCart';
 
 type items = {
   id: number;
@@ -21,6 +22,7 @@ function ProductDetailPage({ params }: { params: Promise<Params> }) {
   const { id } = React.use(params); // unwrap params
   const [product, setProduct] = useState<items | null>(null);
   const [current, setCurrent] = useState<number>(0);
+  const [showAddToCart, setShowAddToCart] =useState<boolean>(false);
 
   useEffect(() => {
     async function fetchProduct() {
@@ -64,7 +66,12 @@ function ProductDetailPage({ params }: { params: Promise<Params> }) {
 
         <p>{product.description}</p>
 
-        <button className="w-full h-[50px] bg-black text-white text-xl">Add to Cart</button>
+        <button className="cursor-pointer w-full h-[50px] bg-black text-white text-xl"
+        onClick={()=>{setShowAddToCart(true)}}
+        >Add to Cart</button>
+
+        {/* { showAddToCart &&
+        (<ButtonAddToCart id={product.id} title={product.title} price={product.id} images={product.images[0]}/>)} */}
       </section>
     </section>
     </>
