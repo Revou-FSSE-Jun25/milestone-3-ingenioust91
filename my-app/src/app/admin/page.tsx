@@ -13,7 +13,7 @@ function adminPage() {
         <div className='h-[30%] flex flex-row items-center justify-center gap-6 '>
         <button onClick={()=>router.push('/inputPage')} className='buttonAdmin bg-[#3a76ef]'>
             <strong>Input Data</strong></button>
-        <button className='buttonAdmin bg-[#a66dd4]'>
+        <button onClick={()=>router.push('/adminListPage')} className='buttonAdmin bg-[#a66dd4]'>
             <strong>List Data</strong></button>
         </div>
     </div>

@@ -1,7 +1,6 @@
 "use client"
 import React, {useState, useEffect} from 'react'
 import Card from './Card';
-import Header from './Header';
 
 type items = {
     id : number;
