@@ -1,7 +1,7 @@
 "use client"
 import React, { useEffect, useState } from 'react';
 import { getProduct } from '@/lib/api';
-import ButtonAddToCart from '@/components/ButtonAddToCart';
+import AddToCart from '@/components/AddToCart';
 
 type items = {
   id: number;
@@ -70,10 +70,11 @@ function ProductDetailPage({ params }: { params: Promise<Params> }) {
         onClick={()=>{setShowAddToCart(true)}}
         >Add to Cart</button>
 
-        {/* { showAddToCart &&
-        (<ButtonAddToCart id={product.id} title={product.title} price={product.id} images={product.images[0]}/>)} */}
       </section>
+      
     </section>
+    { showAddToCart &&
+        (<AddToCart id={product.id} title={product.title} price={product.id} images={product.images[0]}/>)}
     </>
   );
 }

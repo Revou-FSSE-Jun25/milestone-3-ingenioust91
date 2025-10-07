@@ -1,28 +1,66 @@
 "use client"
 import React, {useState, useEffect} from 'react'
 import { getProductsAdmin, deleteProduct } from '@/lib/api';
-import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { animate, stagger, text } from 'animejs';
+import Card from '@/components/Card';
 
 type items = {
     id : number;
     title : string;
     price : number;
     images : string[];
+    category : {
+        id : number
+    }
+}
+
+type SearchForm = {
+  searchQuery : string;
 }
 
 function adminListPage() {
     const [items, setItems] = useState<items[]>([]);
-    const router = useRouter();
+    const [allItems, setAllItems] = useState<items[]>([]);
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const { register, handleSubmit, reset } = useForm<SearchForm>();
 
     async function fetchAdminProduct() {
-        const initialProducts = await getProductsAdmin();
-        setItems(initialProducts)
+        setLoading(true);    // Set loading to true before fetching
+        setError(null);      // Clear any previous errors
+        try {
+            const initialProducts = await getProductsAdmin();
+            setItems(initialProducts)
+            setAllItems(initialProducts)
+        }
+        catch (err:any){setError(err)}
+        finally {
+            setLoading(false);    
+        }
     }
 
     useEffect(()=>{
         fetchAdminProduct();
     },[])
 
+    useEffect(()=>{
+        text.split('p', {chars: { class: 'split-char' },});
+    
+        animate('.split-char', {
+        y: ['0rem', '-1rem', '0rem'],
+        loop: true,
+        delay: stagger(100)
+        });
+    },[])
+        
+    if (loading) return (
+        <div className="flex flex-col justify-center items-center">
+            <p className="text-xl">LOADING...</p>
+        </div>
+    )
+
+    if (error) return <div>Error: {error}</div>;
 
     function handleDelete(id:number) {
         const isDelete = confirm('Are you sure want to delete this product?')
@@ -33,23 +71,59 @@ function adminListPage() {
         }
     }
 
+    function handleEdit(id:number) {
+        
+    }
+
+    function onSubmitFunction(data:SearchForm) {
+        if (data.searchQuery == "")
+        {setItems(allItems)}
+        else 
+        {   setItems(allItems.filter(items => items.title.toLowerCase().includes(data.searchQuery.toLowerCase())))
+            reset();
+        }
+    }
+
+    function handleCategoryChange(categoryId: number) {
+        if (categoryId==0)
+            {setItems(allItems)}
+        else 
+        {
+            setItems(allItems.filter(items => items.category.id == categoryId))
+        }
+    }
+
   return (
     <div className="flex flex-row justify-center flex-wrap gap-6 p-[1%]">
-        <form className='lg:w-[70%]'>
+        <form onSubmit={handleSubmit(onSubmitFunction)} className='lg:w-[70%]'>
             <input className="w-[85%] h-[5vh] pl-[2%] bg-gray-200" type="search" placeholder="SEARCH"
+            {...register("searchQuery",)}
             />
             <button className="w-[5%]" type="submit"><img className="inline-block" src ="/img/search.png"/></button>
         </form>
 
+        <div className='lg:w-[40%] w-full'>
+            <label>Category</label><br/>
+            <select className='inputStyle h-[57%]'
+            onChange={(e)=>{handleCategoryChange(Number(e.target.value))}}>
+              <option value={0}>All</option>
+              <option value={1}>Clothes</option>
+              <option value={3}>Furniture</option>
+              <option value={4}>Shoes</option>
+              <option value={2}>Electronics</option>
+            </select>
+          </div>
+
         <div className="flex flex-row justify-center flex-wrap gap-6 p-[1%]">
             {items.map((item) => (
             <section key={item.id} className='flex flex-col w-[40%] lg:w-[20%] bg-white'>
-                <img onClick={()=>router.push(`/productdetail/${item.id}`)} className="cursor-pointer" src={item.images[0]}/>
-                <p className='p-[1%_5%] text-sm'>Product Id: {item.id}</p>
-                <h1 className='p-[1%_5%] truncate'><b>{item.title}</b></h1>
-                <h2 className='p-[1%_5%] text-right'><b>$ {item.price}</b></h2>
+                <Card key={item.id} id={item.id} title={item.title} price={item.price} images={item.images} />
+                
                 <div className='flex flex-row justify-between'>
-                    <button className='cursor-pointer bg-black text-white w-[40%] text-lg'>EDIT</button>
+                    <button className='cursor-pointer bg-black text-white w-[40%] text-lg'
+                    onClick={() => handleEdit(item.id)}
+                    >EDIT</button>
+                    
                     <button className='cursor-pointer bg-red-500 text-black w-[40%] text-lg'
                     onClick={() => handleDelete(item.id)}
                     ><b>DELETE</b></button>

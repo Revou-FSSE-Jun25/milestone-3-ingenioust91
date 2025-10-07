@@ -23,7 +23,7 @@ export default function Card({id, title, price, images }: CardProps) {
   
 
   return (
-    <section className='flex flex-col w-[40%] lg:w-[20%] bg-white'>
+    <section>
       <div className="text-4xl relative">
         <i className='cursor-pointer fa fa-angle-left absolute top-[60px] lg:top-[120px] hover:bg-gray-500 p-[2px]' onClick={prevImage}></i>
         <i className='cursor-pointer fa fa-angle-right absolute right-0 top-[60px] lg:top-[120px] hover:bg-gray-500 p-[2px]' onClick={nextImage}></i>
