@@ -73,8 +73,9 @@ function ProductDetailPage({ params }: { params: Promise<Params> }) {
       </section>
       
     </section>
+    {/* tampilkan cart jika showAddToCart=true */}
     { showAddToCart &&
-        (<AddToCart id={product.id} title={product.title} price={product.id} images={product.images[0]}/>)}
+        (<AddToCart id={product.id} title={product.title} price={product.price} images={product.images[0]}/>)}
     </>
   );
 }

@@ -26,9 +26,15 @@ function Header() {
     
   }
 
+  const openCart = () =>{
+    
+  }
+
   return (
     <>
     <header className='flex flex-row w-full h-[6%] lg:h-[12%] p-[2%] lg:p-[1%] justify-between fixed top-0 right-0 left-0 bg-white z-999'>
+        <a className="lg:hidden text-xl">☰</a>
+
         <a className='lg:w-[20%] w-[50%]' href='/'>
           <img className='max-h-[100%] lg:h-auto' src="/img/revoshop-02.png" alt="logo-RevoShop" title='logo-RevoShop'/>
         </a>
@@ -50,7 +56,7 @@ function Header() {
             />
             <button className="w-[22%]" type="submit"><img className="inline-block" src ="/img/search.png"/></button>
           </form>
-          <img src ="/img/cart.png"/>
+          <button onClick={()=>openCart()} className="w-[15%]"><img src ="/img/cart.png"/></button>
         </div>
     </header>
     </>
