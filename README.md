@@ -71,8 +71,13 @@
 | Page | Rendering Type | Description |
 |------|----------------|-------------|
 | Home | **SSR** | Server-Side Rendering for fast loading and SEO |
+<<<<<<< HEAD
 | Product Category | **CSR** | Category-based product filtering |
 | Product Detail | **CSR** | Dynamic product detail loading |
+=======
+| Product Category | **SSR** | Category-based product filtering |
+| Product Detail | **SSR** | Dynamic product detail loading |
+>>>>>>> 73207a047515e51a2751225463d4bf216e369ccf
 | Admin Panel | **CSR** | Client-Side Rendering for real-time admin interactions |
 
 ---
@@ -87,10 +92,13 @@
 
 ---
 
+<<<<<<< HEAD
 ## What's for Update
 - **Cart:** add quantity and product with same key should be combine
 - **Admin:** add log in page
 
+=======
+>>>>>>> 73207a047515e51a2751225463d4bf216e369ccf
 ## Author
 
 **Inge Salim**  
