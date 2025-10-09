@@ -1,6 +1,8 @@
 "use client"
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import AddToCart from "./AddToCart";
+import { useState, useEffect } from "react";
 
 type SearchForm = {
   searchQuery : string;
@@ -9,6 +11,7 @@ type SearchForm = {
 function Header() {
   const router = useRouter();
   const { register, handleSubmit, reset } = useForm<SearchForm>();
+  const [showCart, setShowCart] = useState(false);
 
   const handleClick = (slug:string) =>
   { 
@@ -26,9 +29,11 @@ function Header() {
     
   }
 
-  const openCart = () =>{
-    
+  useEffect(() => {
+  if (showCart) {
+    setTimeout(() => setShowCart(false), 5000);
   }
+  }, [showCart]);
 
   return (
     <>
@@ -56,8 +61,13 @@ function Header() {
             />
             <button className="w-[22%]" type="submit"><img className="inline-block" src ="/img/search.png"/></button>
           </form>
-          <button onClick={()=>openCart()} className="w-[15%]"><img src ="/img/cart.png"/></button>
+          <button onClick={() => setShowCart(true)}
+          className="w-[15%] cursor-pointer"><img src ="/img/cart.png"/></button>
         </div>
+
+        {
+          showCart && <AddToCart cartOpen={true}/>
+        }
     </header>
     </>
   )

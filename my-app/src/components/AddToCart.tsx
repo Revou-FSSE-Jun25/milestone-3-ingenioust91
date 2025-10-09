@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import ProductCart from './ProductCart';
+import { useRouter } from "next/navigation";
 
 type productDetail = {
     id : number;
@@ -8,30 +9,47 @@ type productDetail = {
     images : string;
 }
 
-function AddToCart({id, title, price, images }: productDetail) {
+type showCart = {
+  cartOpen : boolean;
+}
+
+function AddToCart(props : productDetail | showCart) {
   const [cartItems, setCartItems] = useState<productDetail[]>([])
   const [showCart, setShowCart] = useState<boolean>(true)
+  const router = useRouter();
 
   //ambil data dari local
-  useEffect(() => {
-    const storedCart = localStorage.getItem("cart")
-    if (storedCart) {
-      setCartItems(JSON.parse(storedCart))
-    } else {setCartItems([])}
-  }, [])
+    useEffect(() => {
+      const storedCart = localStorage.getItem("cart")
+        if (storedCart) {
+          setCartItems(JSON.parse(storedCart))
+        } else {setCartItems([])}
+    }, [])
 
-  // Tambah item baru ke cart
-  useEffect(() => {
-    const newItem = { id, title, price, images }
+    useEffect(() => {
+      if ("cartOpen" in props) {
+       setShowCart(true)} 
+    }, [props])
+  
+    useEffect(() => {
+      if ("id" in props) {
+        const newItem = {
+          id: props.id,
+          title: props.title,
+          price: props.price,
+          images: props.images,
+        };
 
-    setCartItems(prev => {
-      const updated = [...prev, newItem]
-      localStorage.setItem("cart", JSON.stringify(updated))
-      return updated
-    })
-  }, [id])
+        setCartItems((prev) => {
+          const updated = [...prev, newItem];
+          localStorage.setItem("cart", JSON.stringify(updated));
+          return updated;
+        });
+      }
+    }, [props]);
+    
+    const subtotal = cartItems.reduce((sum, item) => sum + item.price, 0)
 
-  const subtotal = cartItems.reduce((sum, item) => sum + item.price, 0)
   return (
     <>
   { showCart &&
@@ -43,8 +61,10 @@ function AddToCart({id, title, price, images }: productDetail) {
   
     <hr/>
 
-     {cartItems.map((item) => (
-    <ProductCart key={item.id} id={item.id} title={item.title} price={item.price} images={item.images}/>))}
+     { 
+        cartItems.map((item) => (
+        <ProductCart key={item.id} id={item.id} title={item.title} price={item.price} images={item.images}/>))
+      }
 
     <hr/>
     <div className='flex flex-row justify-between'>
@@ -53,7 +73,7 @@ function AddToCart({id, title, price, images }: productDetail) {
     </div>
     
     <hr/>
-    <button className="cursor-pointer w-full h-[50px] bg-black text-white text-xl">
+    <button onClick={()=>{router.push(`/checkOut`); setShowCart(false)}} className="cursor-pointer w-full h-[50px] bg-black text-white text-xl">
       Check Out</button>
 
    
