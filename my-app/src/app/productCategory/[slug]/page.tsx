@@ -1,5 +1,6 @@
 "use client"
 import React, {useState, useEffect} from 'react'
+import { useParams } from 'next/navigation';
 import Card from '@/components/Card';
 import { categoryFetch } from '@/lib/api';
 
@@ -10,20 +11,18 @@ type items = {
     images : string[];
 }
 
-interface Params {
-  slug : string;
-}
 
-function ProductList({ params }: { params: Promise<Params> }) {
-    const { slug } = React.use(params); // unwrap params
+function ProductList() {
+    const params = useParams<{ slug: string }>();
+    const slug = params.slug;
     const [items, setItems] = useState<items[]>([]);
-    
+
     useEffect(()=>{
       async function fetchProduct() {
-            const data = await categoryFetch(slug);
-            setItems(data);
-          }
-          fetchProduct();
+        const data = await categoryFetch(slug);
+        setItems(data);
+      }
+      fetchProduct();
     },[])
     
     

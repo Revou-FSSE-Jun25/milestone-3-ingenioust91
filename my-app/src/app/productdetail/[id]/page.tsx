@@ -1,5 +1,6 @@
 "use client"
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'next/navigation';
 import { getProduct } from '@/lib/api';
 import AddToCart from '@/components/AddToCart';
 
@@ -14,12 +15,9 @@ type items = {
   description : string;
 }
 
-interface Params {
-  id: number;
-}
-
-function ProductDetailPage({ params }: { params: Promise<Params> }) {
-  const { id } = React.use(params); // unwrap params
+function ProductDetailPage() {
+  const params = useParams<{ id: string }>();
+  const id = params.id;
   const [product, setProduct] = useState<items | null>(null);
   const [current, setCurrent] = useState<number>(0);
   const [showAddToCart, setShowAddToCart] =useState<boolean>(false);

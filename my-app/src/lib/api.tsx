@@ -1,4 +1,4 @@
-export async function getProduct(id:number){
+export async function getProduct(id:string){
   try{
       const response = await fetch(`https://api.escuelajs.co/api/v1/products/${id}`)
 
