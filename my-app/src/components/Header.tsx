@@ -11,7 +11,8 @@ type SearchForm = {
 function Header() {
   const router = useRouter();
   const { register, handleSubmit, reset } = useForm<SearchForm>();
-  const [showCart, setShowCart] = useState(false);
+  const [showCart, setShowCart] = useState<boolean>(false);
+  const [showBurger, setShowBurger] = useState<boolean>(false);
 
   const handleClick = (slug:string) =>
   { 
@@ -37,8 +38,20 @@ function Header() {
 
   return (
     <>
+    { showBurger &&
+          <div className="fixed p-[3%_6%] w-full bg-white z-[999]">
+            <ul className='w-[90%] flex flex-col gap-[3%]'>
+              <p onClick={()=>setShowBurger(false)} className="text-sm text-right">CLOSE</p>
+              <li onClick={()=>{handleClick("all")}}>All Items</li>
+              <li onClick={()=>{handleClick("clothes")}}>Clothes</li>
+              <li onClick={()=>{handleClick("furniture")}}>Furniture</li>
+              <li onClick={()=>{handleClick("shoes")}}>Shoes</li>
+              <li onClick={()=>{handleClick("electronics")}}>Electronics</li>
+            </ul>
+          </div>
+        }
     <header className='flex flex-row w-full h-[6%] lg:h-[12%] p-[2%] lg:p-[1%] justify-between fixed top-0 right-0 left-0 bg-white z-999'>
-        <a className="lg:hidden text-xl">☰</a>
+        <a onClick={()=>setShowBurger(true)} className="lg:hidden text-xl">☰</a>
 
         <a className='lg:w-[20%] w-[50%]' href='/'>
           <img className='max-h-[100%] lg:h-auto' src="/img/revoshop-02.png" alt="logo-RevoShop" title='logo-RevoShop'/>
