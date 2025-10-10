@@ -9,6 +9,7 @@ export default async function Home() {
   const initialProducts = await getProducts();
   return (
     <>
+    <img src="/img/main-banner.webp"/>
     <ProductList initialProducts={initialProducts} />
     </>
   );

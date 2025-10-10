@@ -71,7 +71,7 @@
 | Page | Rendering Type | Description |
 |------|----------------|-------------|
 | Home | **SSR** | Server-Side Rendering for fast loading and SEO |
-| Product Category | **CSR** | Category-based product filtering |
+| Product Category | **SSR** | Category-based product filtering |
 | Product Detail | **CSR** | Dynamic product detail loading |
 | Admin Panel | **CSR** | Client-Side Rendering for real-time admin interactions |
 | FAQ | **SSG** | Static Site Generation, only render HTML |
