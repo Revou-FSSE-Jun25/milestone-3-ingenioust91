@@ -30,9 +30,6 @@
 ### 3. **Card**
 - Displays individual product information including **image**, **title**, and **price**.
 
-### 4. **ProductInput**
-- Used in the **admin panel** to input and manage product data.
-
 ### 5. **AddToCart**
 - Container for managing products added to the shopping cart.
 
@@ -55,14 +52,17 @@
 ### 4. **Policy**
 - Contains text for the e-commerce policy page.
 
-### 5. **InputPage**
-- Includes the `ProductInput` component for adding or editing products.
+### 5. **Admin**
+- Admin homepage, serving as the entry point for the admin panel.
 
-### 6. **AdminListPage**
+### 6. **InputPage**
+- To input and manage product data.
+
+### 7. **AdminListPage**
 - Displays all products (unfiltered), mainly for admin use.
 
-### 7. **Admin**
-- Admin homepage, serving as the entry point for the admin panel.
+### 8. **EditPage**
+- To edit product data.
 
 ---
 
@@ -71,14 +71,10 @@
 | Page | Rendering Type | Description |
 |------|----------------|-------------|
 | Home | **SSR** | Server-Side Rendering for fast loading and SEO |
-<<<<<<< HEAD
 | Product Category | **CSR** | Category-based product filtering |
 | Product Detail | **CSR** | Dynamic product detail loading |
-=======
-| Product Category | **SSR** | Category-based product filtering |
-| Product Detail | **SSR** | Dynamic product detail loading |
->>>>>>> 73207a047515e51a2751225463d4bf216e369ccf
 | Admin Panel | **CSR** | Client-Side Rendering for real-time admin interactions |
+| FAQ | **SSG** | Static Site Generation, only render HTML |
 
 ---
 
@@ -92,13 +88,11 @@
 
 ---
 
-<<<<<<< HEAD
 ## What's for Update
 - **Cart:** add quantity and product with same key should be combine
 - **Admin:** add log in page
 
 =======
->>>>>>> 73207a047515e51a2751225463d4bf216e369ccf
 ## Author
 
 **Inge Salim**  
