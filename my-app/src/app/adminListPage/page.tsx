@@ -97,16 +97,16 @@ function adminListPage() {
 
   return (
     <div className="flex flex-row justify-center flex-wrap gap-6 p-[1%]">
-        <form onSubmit={handleSubmit(onSubmitFunction)} className='lg:w-[70%]'>
-            <input className="w-[95%] h-[5vh] pl-[2%] bg-gray-200" type="search" placeholder="SEARCH"
+        <form onSubmit={handleSubmit(onSubmitFunction)} className='w-full lg:w-[70%] ml-[100px] lg:ml-0'>
+            <input className="w-[50%] lg:w-[95%] h-[5vh] pl-[2%] bg-gray-200" type="search" placeholder="SEARCH"
             {...register("searchQuery",)}
             />
-            <button className="w-[5%]" type="submit"><img className="inline-block" src ="/img/search.png"/></button>
+            <button className="w-[10%] lg:w-[5%]" type="submit"><img className="inline-block" src ="/img/search.png"/></button>
         </form>
 
         <div className='lg:w-[70%] h-[7vh] flex flex-row'>
-            <label className='w-[20%]'>Filter by Category</label><br/>
-            <select className='inputStyle w-[80%] '
+            <label className='w-[50%] lg:w-[20%]'>Filter by Category</label><br/>
+            <select className='inputStyle w-[50%] lg:w-[80%]'
             onChange={(e)=>{handleCategoryChange(Number(e.target.value))}}>
               <option value={0}>All</option>
               <option value={1}>Clothes</option>

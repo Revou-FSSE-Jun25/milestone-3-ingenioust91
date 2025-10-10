@@ -12,7 +12,6 @@ function Footer() {
             <li><a onClick={() => router.push("/policy")}>About Us</a></li>
             <li><a onClick={() => router.push("/policy")}>Privacy Policy</a></li>
             <li><a onClick={() => router.push("/admin")}>Admin Panel</a></li>
-            <li><a>Contact Us</a></li>
           </ul>
 
 
