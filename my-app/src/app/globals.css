@@ -47,9 +47,9 @@ li:hover {
 }
 
 .inputStyle {
-  border: 1px solid rgb(127, 127, 127);
+  background-color: #dce1ec;
   width: 100%;
-  border-radius: var(--radius-sm);
+  height: 70%;
 }
 
 .inputStyle:focus {
@@ -57,15 +57,71 @@ li:hover {
 }
 
 .buttonAdmin {
-  border-radius: var(--radius-xl);
-  color : white;
-  width : 20%;
-  height: 100%;
-  font-size: var(--text-lg);
-  cursor : pointer;
-  box-shadow: var(--shadow-lg);
+  border: 1px solid #333;
+  background: linear-gradient(#4d4d4d, #1a1a1a);
+  background-image: 
+    linear-gradient(#4d4d4d, #1a1a1a),
+    repeating-linear-gradient(
+      45deg,
+      rgba(255,255,255,0.05) 0,
+      rgba(255,255,255,0.05) 2px,
+      transparent 2px,
+      transparent 4px
+    );
+  color: #fff;
+  text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.8);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1),
+              0 2px 3px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
 }
 
 .buttonAdmin:hover {
-  background-color: rgb(82, 236, 236);
+  background: linear-gradient(#5a5a5a, #2a2a2a);
+  background-image: 
+    linear-gradient(#5a5a5a, #2a2a2a),
+    repeating-linear-gradient(
+      45deg,
+      rgba(255,255,255,0.08) 0,
+      rgba(255,255,255,0.08) 2px,
+      transparent 2px,
+      transparent 4px
+    );
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
+}
+
+.buttonDelete {
+  border: 1px solid #8b0505;
+  background: linear-gradient(#ca3131, #3d0000);
+  background-image: 
+    linear-gradient(#ca3131, #3d0000),
+    repeating-linear-gradient(
+      45deg,
+      rgba(100, 5, 5, 0.05) 0,
+      rgba(255,255,255,0.05) 2px,
+      transparent 2px,
+      transparent 4px
+    );
+  color: #ffffff;
+  text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.8);
+  box-shadow: inset 0 1px 0 rgba(56, 8, 8, 0.1),
+              0 2px 3px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.buttonDelete:hover {
+  background: linear-gradient(#ca3131, #3d0000);
+  background-image: 
+    linear-gradient(#ca3131, #3d0000),
+    repeating-linear-gradient(
+      45deg,
+      rgba(100, 5, 5, 0.05) 0,
+      rgba(255,255,255,0.05) 2px,
+      transparent 2px,
+      transparent 4px
+    );
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
 }

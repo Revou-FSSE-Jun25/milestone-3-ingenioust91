@@ -112,7 +112,7 @@ return (
             />
           </div>
 
-        <button className='cursor-pointer w-full h-[50px] bg-red-500 text-white text-xl'>PAY NOW</button>
+        <button className='cursor-pointer w-full h-[50px] text-xl buttonAdmin'>PAY NOW</button>
         </form>
       </div>
     </div>

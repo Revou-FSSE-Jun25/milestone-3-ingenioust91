@@ -124,7 +124,7 @@ function ProductInput() {
           </div>
           
         
-        <button className='cursor-pointer lg:w-[40%] w-full h-[50px] bg-black text-white text-xl'>SUBMIT</button>
+        <button className='cursor-pointer lg:w-[40%] w-full h-[50px] text-xl buttonAdmin'>SUBMIT</button>
         </form>
       </div>
     </div>

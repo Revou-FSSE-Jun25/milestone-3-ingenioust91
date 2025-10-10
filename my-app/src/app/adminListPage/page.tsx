@@ -4,6 +4,7 @@ import { getProductsAdmin, deleteProduct } from '@/lib/api';
 import { useForm } from "react-hook-form";
 import { animate, stagger, text } from 'animejs';
 import Card from '@/components/Card';
+import { useRouter } from "next/navigation";
 
 type items = {
     id : number;
@@ -25,6 +26,7 @@ function adminListPage() {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
     const { register, handleSubmit, reset } = useForm<SearchForm>();
+    const router = useRouter();
 
     async function fetchAdminProduct() {
         setLoading(true);    // Set loading to true before fetching
@@ -72,7 +74,7 @@ function adminListPage() {
     }
 
     function handleEdit(id:number) {
-        
+        router.push(`/productdetail/${id}/edit`)
     }
 
     function onSubmitFunction(data:SearchForm) {
@@ -96,15 +98,15 @@ function adminListPage() {
   return (
     <div className="flex flex-row justify-center flex-wrap gap-6 p-[1%]">
         <form onSubmit={handleSubmit(onSubmitFunction)} className='lg:w-[70%]'>
-            <input className="w-[85%] h-[5vh] pl-[2%] bg-gray-200" type="search" placeholder="SEARCH"
+            <input className="w-[95%] h-[5vh] pl-[2%] bg-gray-200" type="search" placeholder="SEARCH"
             {...register("searchQuery",)}
             />
             <button className="w-[5%]" type="submit"><img className="inline-block" src ="/img/search.png"/></button>
         </form>
 
-        <div className='lg:w-[40%] w-full'>
-            <label>Category</label><br/>
-            <select className='inputStyle h-[57%]'
+        <div className='lg:w-[70%] h-[7vh] flex flex-row'>
+            <label className='w-[20%]'>Filter by Category</label><br/>
+            <select className='inputStyle w-[80%] '
             onChange={(e)=>{handleCategoryChange(Number(e.target.value))}}>
               <option value={0}>All</option>
               <option value={1}>Clothes</option>
@@ -120,11 +122,11 @@ function adminListPage() {
                 <Card key={item.id} id={item.id} title={item.title} price={item.price} images={item.images} />
                 
                 <div className='flex flex-row justify-between'>
-                    <button className='cursor-pointer bg-black text-white w-[40%] text-lg'
+                    <button className='cursor-pointer w-[40%] text-lg buttonAdmin'
                     onClick={() => handleEdit(item.id)}
                     >EDIT</button>
                     
-                    <button className='cursor-pointer bg-red-500 text-black w-[40%] text-lg'
+                    <button className='cursor-pointer w-[40%] text-lg buttonDelete'
                     onClick={() => handleDelete(item.id)}
                     ><b>DELETE</b></button>
                 </div>

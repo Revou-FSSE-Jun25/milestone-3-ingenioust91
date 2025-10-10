@@ -73,7 +73,7 @@ function AddToCart(props : productDetail | showCart) {
     </div>
     
     <hr/>
-    <button onClick={()=>{router.push(`/checkOut`); setShowCart(false)}} className="cursor-pointer w-full h-[50px] bg-black text-white text-xl">
+    <button onClick={()=>{router.push(`/checkOut`); setShowCart(false)}} className="cursor-pointer w-full h-[50px] text-xl buttonAdmin">
       Check Out</button>
 
    

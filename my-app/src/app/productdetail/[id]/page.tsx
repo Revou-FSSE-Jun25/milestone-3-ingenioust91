@@ -64,7 +64,7 @@ function ProductDetailPage() {
 
         <p>{product.description}</p>
 
-        <button className="cursor-pointer w-full h-[50px] bg-black text-white text-xl"
+        <button className="cursor-pointer w-full h-[50px] text-xl buttonAdmin"
         onClick={()=>{setShowAddToCart(true)}}
         >Add to Cart</button>
 
