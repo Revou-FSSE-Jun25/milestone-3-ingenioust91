@@ -109,10 +109,10 @@ function adminListPage() {
             <select className='inputStyle w-[50%] lg:w-[80%]'
             onChange={(e)=>{handleCategoryChange(Number(e.target.value))}}>
               <option value={0}>All</option>
-              <option value={1}>Clothes</option>
-              <option value={3}>Furniture</option>
-              <option value={4}>Shoes</option>
-              <option value={2}>Electronics</option>
+              <option value={10}>Clothes</option>
+              <option value={8}>Furniture</option>
+              <option value={9}>Shoes</option>
+              <option value={7}>Electronics</option>
             </select>
           </div>
 
