@@ -1,5 +1,6 @@
 "use client"
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { useForm } from "react-hook-form";
 import AddToCart from "./AddToCart";
 import { useState, useEffect } from "react";
@@ -13,14 +14,6 @@ function Header() {
   const { register, handleSubmit, reset } = useForm<SearchForm>();
   const [showCart, setShowCart] = useState<boolean>(false);
   const [showBurger, setShowBurger] = useState<boolean>(false);
-
-  const handleClick = (slug:string) =>
-  { 
-    if (slug=="all"){
-      router.push(`/`)
-    } else
-    {router.push(`/productCategory/${slug}`)}
-  }
 
   const onSubmitFunction = async (data:SearchForm) => {
     try {
@@ -42,11 +35,11 @@ function Header() {
           <div className="fixed p-[3%_6%] w-full bg-white z-[999]">
             <ul className='w-[90%] flex flex-col gap-[3%]'>
               <p onClick={()=>setShowBurger(false)} className="text-sm text-right">CLOSE</p>
-              <li onClick={()=>{handleClick("all")}}>All Items</li>
-              <li onClick={()=>{handleClick("clothes")}}>Clothes</li>
-              <li onClick={()=>{handleClick("furniture")}}>Furniture</li>
-              <li onClick={()=>{handleClick("shoes")}}>Shoes</li>
-              <li onClick={()=>{handleClick("electronics")}}>Electronics</li>
+              <li><Link href={`/`}>All Items</Link></li>
+              <li><Link href={`/productCategory/clothes`}>Clothes</Link></li>
+              <li><Link href={`/productCategory/furniture`}>Furniture</Link></li>
+              <li><Link href={`/productCategory/shoes`}>Shoes</Link></li>
+              <li><Link href={`/productCategory/electronics`}>Electronics</Link></li>
             </ul>
           </div>
         }
@@ -58,11 +51,11 @@ function Header() {
         </a>
 
         <ul className='hidden w-[50%] lg:flex flex-row gap-[3%] justify-center items-center'>
-          <li onClick={()=>{handleClick("all")}}>All Items</li>
-          <li onClick={()=>{handleClick("clothes")}}>Clothes</li>
-          <li onClick={()=>{handleClick("furniture")}}>Furniture</li>
-          <li onClick={()=>{handleClick("shoes")}}>Shoes</li>
-          <li onClick={()=>{handleClick("electronics")}}>Electronics</li>
+          <li><Link href={`/`}>All Items</Link></li>
+          <li><Link href={`/productCategory/clothes`}>Clothes</Link></li>
+          <li><Link href={`/productCategory/furniture`}>Furniture</Link></li>
+          <li><Link href={`/productCategory/shoes`}>Shoes</Link></li>
+          <li><Link href={`/productCategory/electronics`}>Electronics</Link></li>
         </ul>
 
         <div className='flex flex-row gap-[2%] w-[50%] lg:w-[25%] right-0 justify-end'>
