@@ -14,7 +14,7 @@ export async function getProduct(id:string){
 
 export async function getProducts(){
     try{
-      const response = await fetch(`https://api.escuelajs.co/api/v1/products?offset=0&limit=12`)
+      const response = await fetch(`https://api.escuelajs.co/api/v1/products?offset=0&limit=12`, {cache: "no-cache"})
 
       if (!response.ok) throw new Error("Gagal fetch produk");
       
