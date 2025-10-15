@@ -1,54 +1,27 @@
-"use client"
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
+import React from 'react'
 import { getProduct } from '@/lib/api';
-import AddToCart from '@/components/AddToCart';
+import ImageCard from './ImageCard';
+import NotFound from '@/app/NotFound';
 
-type items = {
-  id: number;
-  title: string;
-  price: number;
-  images: string[];
-  category : {
-    slug : string;
-  };
-  description : string;
+export const revalidate = 60; // re-fetch data tiap 1 menit
+
+export async function generateStaticParams() {
+  const res = await fetch('https://api.escuelajs.co/api/v1/products')
+  const products = await res.json()
+
+  return products.map((p: any) => ({ id: p.id.toString() }))
 }
 
-function ProductDetailPage() {
-  const params = useParams<{ id: string }>();
+async function ProductDetailPage({ params }: { params: { id: string } }) {
   const id = params.id;
-  const [product, setProduct] = useState<items | null>(null);
-  const [current, setCurrent] = useState<number>(0);
-  const [showAddToCart, setShowAddToCart] =useState<boolean>(false);
+  const product = await getProduct(id);
 
-  useEffect(() => {
-    async function fetchProduct() {
-      const data = await getProduct(id);
-      setProduct(data);
-    }
-    fetchProduct();
-  }, [id]);
-
-  if (!product) return <p>The Product doesn't exist</p>;
-
-  const nextImage = () => {
-      setCurrent((prev) => (prev + 1) % product.images.length); //supaya bisa balik ke 0 kalau udah sampai di imagelength
-    };
-  
-  const prevImage = () => {
-      setCurrent((prev) => (prev - 1 + product.images.length) % product.images.length); //supaya bisa balik ke imagelength kalau sudah 0
-    };
+  if (!product || !product.id) return NotFound();
   
   return (
-    <>
     <section className="flex flex-col lg:flex-row w-full h-[75%] p-[2%_5%] justify-center">
       {/* product container */}
-      <section className="lg:w-[40%] relative">
-        <img src={product.images[current]} alt={product.title} />
-        <a onClick={prevImage} className="text-3xl absolute top-[50%] cursor-pointer p-[10px] bg-black opacity-20 text-white">❮</a>
-        <a onClick={nextImage}className="text-3xl absolute top-[50%] right-0 cursor-pointer p-[10px] bg-black opacity-20 text-white">❯</a>
-      </section>
+        <ImageCard img={product.images} title={product.title} />
 
       {/* product detail */}
       <section className="flex flex-col gap-[5px] lg:gap-[30px] lg:w-[50%] p-[1%_5%]">
@@ -64,17 +37,11 @@ function ProductDetailPage() {
 
         <p>{product.description}</p>
 
-        <button className="cursor-pointer w-full h-[50px] text-xl buttonAdmin"
-        onClick={()=>{setShowAddToCart(true)}}
-        >Add to Cart</button>
+        <button className="cursor-pointer w-full h-[50px] text-xl buttonAdmin">Add to Cart</button>
 
       </section>
       
     </section>
-    {/* tampilkan cart jika showAddToCart=true */}
-    { showAddToCart &&
-        (<AddToCart id={product.id} title={product.title} price={product.price} images={product.images[0]}/>)}
-    </>
   );
 }
 

@@ -1,10 +1,13 @@
 import React from 'react'
 import Card from '@/components/Card';
 import { categoryFetch } from '@/lib/api';
+import NotFound from '@/app/NotFound';
 
 async function ProductList({ params }: { params: { slug: string } }) {
     const slug = params.slug;
     const data = await categoryFetch(slug);
+
+    if (!data || !data.id) return <NotFound/>
 
   return (
     <>

@@ -38,7 +38,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${roboto.className} antialiased`}
       >
       <Header/>
-      <div className="mt-[12%] lg:mt-[6%]"></div>
+      <div className="mt-[12%] lg:mt-[6%] flex-grow"></div>
         {children}
       <Footer />
       </body>

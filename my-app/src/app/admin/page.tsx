@@ -11,9 +11,9 @@ function adminPage() {
         <h1 className='text-center text-2xl'>WELCOME TO ADMIN PANEL</h1>
 
         <div className='h-[30%] flex flex-row items-center justify-center gap-6 '>
-        <button onClick={()=>router.push('/inputPage')} className='buttonAdmin w-[40%] lg:w-[20%] h-full'>
+        <button onClick={()=>router.push('/inputPage')} className='buttonAdmin text-2xl p-[2%_5%] h-full'>
             <strong>Input Data</strong></button>
-        <button onClick={()=>router.push('/adminListPage')} className='buttonAdmin w-[40%] lg:w-[20%] h-full'>
+        <button onClick={()=>router.push('/adminListPage')} className='buttonAdmin text-2xl p-[2%_5%] h-full'>
             <strong>List Data</strong></button>
         </div>
     </div>

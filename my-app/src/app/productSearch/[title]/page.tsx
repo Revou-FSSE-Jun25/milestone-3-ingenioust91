@@ -3,6 +3,7 @@ import React, {useState, useEffect} from 'react'
 import Card from '@/components/Card';
 import { searchbyTitle } from '@/lib/api';
 import { useParams } from 'next/navigation';
+import NotFound from '@/app/NotFound';
 
 type items = {
     id : number;
@@ -28,10 +29,7 @@ function ProductList() {
 
     if (items.length === 0) {
         return (
-            <div className='w-full h-[70vh] flex flex-col gap-4 justify-center items-center'>
-                <img className='w-[35%] lg:w-[10%]' src='/img/revoshop-03.png' />
-                <h1 className='text-xl'>Oops! Couldn't find "{title}"</h1>
-            </div>
+            <NotFound/>
         )
     }
     
