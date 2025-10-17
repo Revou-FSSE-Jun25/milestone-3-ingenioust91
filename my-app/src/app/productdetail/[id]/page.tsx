@@ -2,15 +2,13 @@ import React from 'react'
 import { getProduct } from '@/lib/api';
 import ImageCard from './ImageCard';
 import NotFound from '@/app/NotFound';
+import ButtonAddToCart from '@/app/productdetail/[id]/ButtonAddToCart';
 
-export const revalidate = 60; // re-fetch data tiap 1 menit
+// bikin halaman on-demand
+export const dynamicParams = true;
 
-export async function generateStaticParams() {
-  const res = await fetch('https://api.escuelajs.co/api/v1/products')
-  const products = await res.json()
-
-  return products.map((p: any) => ({ id: p.id.toString() }))
-}
+// regenerate tiap 1 menit
+export const revalidate = 300;
 
 async function ProductDetailPage({ params }: { params: { id: string } }) {
   const id = params.id;
@@ -37,7 +35,7 @@ async function ProductDetailPage({ params }: { params: { id: string } }) {
 
         <p>{product.description}</p>
 
-        <button className="cursor-pointer w-full h-[50px] text-xl buttonAdmin">Add to Cart</button>
+        <ButtonAddToCart id={product.id} title={product.title} price={product.price} image ={product.images[0]}/>
 
       </section>
       

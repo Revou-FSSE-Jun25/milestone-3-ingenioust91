@@ -1,7 +1,7 @@
 "use client"
 import React from 'react'
 import { useState, useEffect } from 'react'
-import ProductCart from '@/components/ProductCart'
+import ProductCart from '@/app/productdetail/[id]/ProductCart'
 import { useForm } from "react-hook-form";
 
 type productDetail = {

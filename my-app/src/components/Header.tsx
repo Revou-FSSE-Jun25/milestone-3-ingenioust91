@@ -2,8 +2,8 @@
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
-import AddToCart from "./AddToCart";
-import { useState, useEffect } from "react";
+import { useState} from "react";
+import CartList from "./CartList";
 
 type SearchForm = {
   searchQuery : string;
@@ -12,8 +12,8 @@ type SearchForm = {
 function Header() {
   const router = useRouter();
   const { register, handleSubmit, reset } = useForm<SearchForm>();
-  const [showCart, setShowCart] = useState<boolean>(false);
   const [showBurger, setShowBurger] = useState<boolean>(false);
+  const [showCart, setShowCart] = useState(false);
 
   const onSubmitFunction = async (data:SearchForm) => {
     try {
@@ -22,12 +22,6 @@ function Header() {
     } catch (e) {}
     
   }
-
-  useEffect(() => {
-  if (showCart) {
-    setTimeout(() => setShowCart(false), 5000);
-  }
-  }, [showCart]);
 
   return (
     <>
@@ -67,14 +61,11 @@ function Header() {
             />
             <button className="w-[22%]" type="submit"><img className="inline-block" src ="/img/search.png"/></button>
           </form>
-          <button onClick={() => setShowCart(true)}
-          className="w-[15%] cursor-pointer"><img src ="/img/cart.png"/></button>
+          <button onClick={()=>setShowCart(!showCart)} className="w-[15%] cursor-pointer"><img src ="/img/cart.png"/></button>
         </div>
-
-        {
-          showCart && <AddToCart cartOpen={true}/>
-        }
     </header>
+    {showCart &&
+    <CartList/>}
     </>
   )
 }
