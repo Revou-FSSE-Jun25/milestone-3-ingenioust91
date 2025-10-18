@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { useState} from "react";
 import CartList from "./CartList";
+import { useToggle } from "@/app/context/ToggleCartContext";
 
 type SearchForm = {
   searchQuery : string;
@@ -13,7 +14,7 @@ function Header() {
   const router = useRouter();
   const { register, handleSubmit, reset } = useForm<SearchForm>();
   const [showBurger, setShowBurger] = useState<boolean>(false);
-  const [showCart, setShowCart] = useState(false);
+  const {isCartOpen, openCart} = useToggle();
 
   const onSubmitFunction = async (data:SearchForm) => {
     try {
@@ -61,10 +62,10 @@ function Header() {
             />
             <button className="w-[22%]" type="submit"><img className="inline-block" src ="/img/search.png"/></button>
           </form>
-          <button onClick={()=>setShowCart(!showCart)} className="w-[15%] cursor-pointer"><img src ="/img/cart.png"/></button>
+          <button onClick={openCart} className="w-[15%] cursor-pointer"><img src ="/img/cart.png"/></button>
         </div>
     </header>
-    {showCart &&
+    {isCartOpen &&
     <CartList/>}
     </>
   )

@@ -3,6 +3,9 @@ import Card from '@/components/Card';
 import { categoryFetch } from '@/lib/api';
 import NotFound from '@/app/NotFound';
 
+// regenerate tiap 1 menit
+export const revalidate = 60;
+
 async function ProductList({ params }: { params: { slug: string } }) {
     const slug = params.slug;
     const data = await categoryFetch(slug);

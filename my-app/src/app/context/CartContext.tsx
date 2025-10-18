@@ -10,7 +10,9 @@ type productDetail = {
 
 type cartType = {
     items : productDetail[],
-    addItem : (item: productDetail) => void;
+    addItem : (item: productDetail) => void,
+    deleteItem : (cartNumber:number) => void,
+    deleteAllItem : () => void,
 }
 
 const CartContext = createContext<cartType | undefined>(undefined);
@@ -39,10 +41,26 @@ export function CartProvider({children}:any){
             }
             return updatedCart;
         })
-            
     }
 
-    const value = {items: cartItems, addItem}
+    const deleteItem = (cartNumber:number) =>{
+        setCartItems((prev) =>{
+            const updatedCart = prev.filter(prev => prev.id !== cartNumber)
+            if (typeof window !== "undefined") {
+            localStorage.setItem("cartItems", JSON.stringify(updatedCart));
+            }
+            return updatedCart;
+        })
+    }
+
+    const deleteAllItem = () =>{
+        if (typeof window !== "undefined") {
+            localStorage.clear();
+        }
+        setCartItems([])
+    }
+
+    const value = {items: cartItems, addItem, deleteItem, deleteAllItem}
 
     return <CartContext.Provider value={value}>{children}</CartContext.Provider>
 }

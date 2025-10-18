@@ -3,6 +3,8 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import ProductCart from '@/app/productdetail/[id]/ProductCart'
 import { useForm } from "react-hook-form";
+import { useCart } from '../context/CartContext';
+import { useRouter } from 'next/navigation';
 
 type productDetail = {
     id : number;
@@ -21,20 +23,21 @@ type InputForm = {
 
 function checkOutPage() {
     const [cartItems, setCartItems] = useState<productDetail[]>([])
-    const { register, handleSubmit, reset, formState: {errors} } = useForm<InputForm>();
+    const { register, handleSubmit, formState: {errors} } = useForm<InputForm>();
+    const {items, deleteAllItem} = useCart();
+    const router = useRouter();
 
     useEffect(() => {
-          const storedCart = localStorage.getItem("cart")
-            if (storedCart) {
-              setCartItems(JSON.parse(storedCart))
-            } else {setCartItems([])}
-        }, [])
+        setCartItems(items)
+    }, [items])
 
     const subtotal = cartItems.reduce((sum, i) => sum + i.price, 0);
 
     function onSubmitInput(data:InputForm){
         alert(`Thank you ${data.name},
-            PAYMENT with ${data.paymentMethod} SUCCESS.`)
+        PAYMENT with ${data.paymentMethod} SUCCESS.`)
+        deleteAllItem();
+        router.push(`/`)
     }
 
 return (

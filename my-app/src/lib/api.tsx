@@ -14,7 +14,7 @@ export async function getProduct(id:string){
 
 export async function getProducts(){
     try{
-      const response = await fetch(`https://api.escuelajs.co/api/v1/products?offset=0&limit=12`, { cache: "no-cache" })
+      const response = await fetch(`https://api.escuelajs.co/api/v1/products?offset=0&limit=12`, {next: { revalidate: 60 }})
 
       if (!response.ok) throw new Error("Gagal fetch produk");
       
@@ -27,7 +27,7 @@ export async function getProducts(){
 
 export async function categoryFetch(slug:string){
     try{
-      const response = await fetch(`https://api.escuelajs.co/api/v1/products?categorySlug=${slug}&offset=0&limit=12`)
+      const response = await fetch(`https://api.escuelajs.co/api/v1/products?categorySlug=${slug}&offset=0&limit=12`, {next: { revalidate: 60 }})
 
       if (!response.ok) throw new Error("Gagal fetch produk");
 
@@ -52,7 +52,7 @@ export async function searchbyTitle(title:string){
 
 export async function getProductsAdmin(){
     try{
-      const response = await fetch(`https://api.escuelajs.co/api/v1/products`)
+      const response = await fetch(`https://api.escuelajs.co/api/v1/products`, {next: { revalidate: 60 }})
 
       if (!response.ok) throw new Error("Gagal fetch produk");
 

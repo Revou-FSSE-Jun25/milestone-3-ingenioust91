@@ -1,8 +1,8 @@
 "use client"
 import React from 'react'
 import { useCart } from '@/app/context/CartContext';
-import { useState } from 'react';
 import CartList from '../../../components/CartList';
+import { useToggle } from '@/app/context/ToggleCartContext';
 
 type itemCart = {
     id : number,
@@ -13,16 +13,18 @@ type itemCart = {
 
 function ButtonAddToCart({id, title, image, price}:itemCart) {
   const {addItem} = useCart();
-  const [showCart, setShowCart] = useState(false);
+  const {isCartOpen, openCart} = useToggle();
 
+  function handleClick(){
+    addItem({id:id, price:price, title:title, images:image});
+    openCart();
+  }
 
   return (
   <>
-  <button onClick={()=>{addItem({id:id, price:price, title:title, images:image}); setShowCart(true)}} className="cursor-pointer w-full h-[50px] text-xl buttonAdmin">Add to Cart</button>
-  {
-   showCart &&
-   <CartList/> 
-  }
+  <button onClick={()=>handleClick()} className="cursor-pointer w-full h-[50px] text-xl buttonAdmin">Add to Cart</button>
+  {isCartOpen &&
+    <CartList/>}
   </>
   )
 }

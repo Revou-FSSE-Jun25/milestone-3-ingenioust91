@@ -4,6 +4,7 @@ import "./globals.css";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { CartProvider } from "./context/CartContext";
+import { ToggleProvider } from "./context/ToggleCartContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,12 +39,14 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${roboto.className} antialiased`}
       >
+      <ToggleProvider>
       <CartProvider>
       <Header/>
       <div className="mt-[12%] lg:mt-[6%] flex-grow"></div>
       
       {children}
       </CartProvider>
+      </ToggleProvider>
       <Footer />
       </body>
     </html>

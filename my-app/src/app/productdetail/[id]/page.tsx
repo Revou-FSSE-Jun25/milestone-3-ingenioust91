@@ -7,7 +7,7 @@ import ButtonAddToCart from '@/app/productdetail/[id]/ButtonAddToCart';
 // bikin halaman on-demand
 export const dynamicParams = true;
 
-// regenerate tiap 1 menit
+// regenerate tiap 5 menit
 export const revalidate = 300;
 
 async function ProductDetailPage({ params }: { params: { id: string } }) {
