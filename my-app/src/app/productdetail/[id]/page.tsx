@@ -17,6 +17,7 @@ async function ProductDetailPage({ params }: { params: { id: string } }) {
   if (!product || !product.id) return NotFound();
   
   return (
+    <div className="mt-[12%] lg:mt-[6%]">
     <section className="flex flex-col lg:flex-row w-full h-[75%] p-[2%_5%] justify-center">
       {/* product container */}
         <ImageCard img={product.images} title={product.title} />
@@ -40,6 +41,7 @@ async function ProductDetailPage({ params }: { params: { id: string } }) {
       </section>
       
     </section>
+    </div>
   );
 }
 

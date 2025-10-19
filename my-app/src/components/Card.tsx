@@ -28,7 +28,7 @@ export default function Card({id, title, price, images }: CardProps) {
         <i className='cursor-pointer fa fa-angle-right absolute right-0 top-[60px] lg:top-[120px] hover:bg-gray-500 p-[2px]' onClick={nextImage}></i>
       </div>
 
-      <Link href={`/productdetail/${id}`}><img className="cursor-pointer" src={images[current]}/></Link>
+      <Link href={`/productdetail/${id}`}><img alt={title} className="cursor-pointer" src={images[current]}/></Link>
       <p className='p-[1%_5%] text-sm'>Product Id: {id}</p>
       <h1 className='p-[1%_5%] truncate'><b>{title}</b></h1>
       <h2 className='p-[1%_5%] text-right'><b>$ {price}</b></h2>

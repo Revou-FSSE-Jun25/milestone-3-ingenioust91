@@ -10,10 +10,10 @@ async function ProductList({ params }: { params: { slug: string } }) {
     const slug = params.slug;
     const data = await categoryFetch(slug);
 
-    if (!data || !data.id) return <NotFound/>
+    if (!data || data.length === 0) return NotFound();
 
   return (
-    <>
+    <div className="mt-[12%] lg:mt-[6%]">
         <div className="flex flex-row justify-center flex-wrap gap-6 p-[1%]">
             {data.map((item:any) => (
             <section key={item.id} className='flex flex-col w-[40%] lg:w-[20%] bg-white'>
@@ -21,7 +21,7 @@ async function ProductList({ params }: { params: { slug: string } }) {
             </section>
           ))}
         </div>
-    </>
+    </div>
   )
 }
 

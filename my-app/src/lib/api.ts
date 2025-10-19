@@ -76,3 +76,25 @@ export async function deleteProduct(id:number){
   }
 
 }
+
+export async function login(email: string, password:string){
+  try{
+    const response = await fetch(`https://api.escuelajs.co/api/v1/auth/login`,{
+      method: "POST",
+      headers : {'Content-Type' : 'application/json'},
+      body : JSON.stringify({
+        email : email,
+        password : password,
+        expiresInMins: 30, // optional, defaults to 60
+      })
+    })
+
+    if (!response.ok) {
+      return null
+    }
+    return response.json();
+  }
+  catch(Error:any) {
+    throw new Error("Gagal fetch user")
+  }
+}

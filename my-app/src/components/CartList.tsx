@@ -71,7 +71,7 @@ return (
 
       <hr />
 
-      <button onClick={() => {router.push(`/checkOut`);}}
+      <button onClick={() => {router.push(`/checkOut`); closeCart()}}
         className="cursor-pointer w-full h-[50px] text-xl buttonAdmin">
         Check Out
       </button>

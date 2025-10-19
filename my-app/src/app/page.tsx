@@ -8,10 +8,10 @@ export const revalidate = 60;
 export default async function Home() {
   const initialProducts = await getProducts();
   return (
-    <>
+    <div className="mt-[12%] lg:mt-[6%]">
     <img src="/img/main-banner.webp"/>
     <MiniBanner/>
     <ProductList initialProducts={initialProducts} />
-    </>
+    </div>
   );
 }
