@@ -17,7 +17,7 @@ function ProductCart({id, title, price, images }: productDetail) {
         <div className='w-[40%]'>
           <p className='text-sm'>Id: {id}</p>
           <h2 className='text-base/5'>{title}</h2>
-          <h2><b>${price}</b></h2>
+          <h2>${price}</h2>
         </div>
     </div>
   )

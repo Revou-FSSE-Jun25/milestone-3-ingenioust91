@@ -6,6 +6,7 @@ type productDetail = {
     title : string;
     price : number;
     images : string;
+    quantity? : number
 }
 
 type cartType = {
@@ -30,16 +31,27 @@ export function CartProvider({children}:any){
 
 
     const addItem = (items : productDetail) => {
-        if (typeof window !== "undefined") {
-        localStorage.setItem("cartItems", JSON.stringify(cartItems));
-        }
+        setCartItems((prev)=>{
+            const exitingItem = prev.find((currentItem)=> currentItem.id === items.id)
 
-        setCartItems((prev) =>{
-            const updatedCart = [...prev, items];
-            if (typeof window !== "undefined") {
-            localStorage.setItem("cartItems", JSON.stringify(updatedCart));
+            let updatedCart;
+
+            if (exitingItem) {
+                updatedCart = prev.map((currentItem)=>
+                    currentItem.id === items.id ?
+                        {...currentItem, quantity: (currentItem.quantity || 1) + 1}
+                        : currentItem
+                )
+            } else {
+                // kalau belum ada, tambahkan dengan quantity = 1
+                updatedCart = [...prev, { ...items, quantity: 1 }];
             }
-            return updatedCart;
+
+            if (typeof window !== "undefined") {
+                localStorage.setItem("cartItems", JSON.stringify(updatedCart));
+            }
+
+        return updatedCart;
         })
     }
 

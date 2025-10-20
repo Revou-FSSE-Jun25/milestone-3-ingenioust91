@@ -9,6 +9,7 @@ type productDetail = {
     title : string;
     price : number;
     images : string;
+    quantity? : number;
 }
 
 
@@ -22,22 +23,23 @@ function CartList() {
     setCartItems(items)
   },[items])
   
-  const subtotal = cartItems.reduce((sum, item) => sum + item.price, 0)
+  const subtotal = cartItems.reduce((sum, item) => sum + item.price, 0);
+  let sub : number;
 
 return (
   <>
     {/* Backdrop*/}
     <div
       onClick={closeCart}
-      className={`fixed inset-0 bg-black/40 z-[998]${
+      className={`fixed inset-0 bg-black/40 z-[998] ${
         isCartOpen ? "opacity-100 visible" : "opacity-0 invisible"
       }`}
     />
 
     {/* Cart Sidebar */}
     <div
-      className={`fixed top-0 right-0 z-[999] lg:w-[25%] w-[85%] h-full bg-white p-[2%]
-      flex flex-col gap-y-4
+      className={`fixed top-0 right-0 z-[999] lg:w-[25%] w-[85%] min-h-full bg-white p-[2%]
+      flex flex-col gap-y-3
       ${isCartOpen ? "translate-x-0" : "translate-x-full"}`}
     >
       <div className="flex flex-row justify-between items-center">
@@ -52,7 +54,8 @@ return (
       <hr />
 
       {cartItems.map((item) => (
-        <div key={item.id} className='flex flex-row items-start'>
+      <div className='flex flex-col gap-y-1' key={item.id} >
+        <div className='flex flex-row items-start'>
         <ProductCart
           id={item.id}
           title={item.title}
@@ -61,14 +64,26 @@ return (
         />
         <button onClick={()=>deleteItem(item.id)} className='cursor-pointer'><b>X</b></button>
         </div>
+
+        <div className="flex justify-between items-center ">
+          <div className='w-[40%] border border-gray-300 rounded-sm'>
+            <button className="w-[25%] text-xl hover:bg-gray-200">−</button>
+            <span className="w-[50%] inline-block text-center text-xl font-semibold border-x border-gray-300"> {item.quantity} </span>
+            <button  className="w-[25%] text-xl hover:bg-gray-200">+</button>
+          </div>
+
+          
+          <h2 ><b>${item.quantity ? sub = item.price*item.quantity : sub=item.price}</b></h2>
+        </div>
+
+      </div>
       ))}
 
       <hr />
       <div className="flex flex-row justify-between">
         <h2>SUBTOTAL :</h2>
-        <h2><b>$ {subtotal}</b></h2>
+        <h2 className='text-xl'><b>${subtotal}</b></h2>
       </div>
-
       <hr />
 
       <button onClick={() => {router.push(`/checkOut`); closeCart()}}
