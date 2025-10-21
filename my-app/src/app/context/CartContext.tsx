@@ -14,6 +14,8 @@ type cartType = {
     addItem : (item: productDetail) => void,
     deleteItem : (cartNumber:number) => void,
     deleteAllItem : () => void,
+    addQuantity : (cartNumber:number) => void,
+    minQuantity : (cartNumber:number) => void,
 }
 
 const CartContext = createContext<cartType | undefined>(undefined);
@@ -72,7 +74,37 @@ export function CartProvider({children}:any){
         setCartItems([])
     }
 
-    const value = {items: cartItems, addItem, deleteItem, deleteAllItem}
+    const addQuantity = (cartNumber:number) =>{
+       setCartItems((prev)=>{
+        const updatedCart = prev.map((currentItem)=>
+            currentItem.id === cartNumber ?
+            {...currentItem, quantity: (currentItem.quantity || 1) + 1}
+            : currentItem)
+            
+            if (typeof window !== "undefined") {
+                localStorage.setItem("cartItems", JSON.stringify(updatedCart));
+            }
+
+        return updatedCart;
+        })
+    }
+
+    const minQuantity = (cartNumber:number) =>{
+       setCartItems((prev)=>{
+        const updatedCart = prev.map((currentItem)=>
+            currentItem.id === cartNumber ?
+            {...currentItem, quantity: (currentItem.quantity || 1) - 1}
+            : currentItem)
+            
+            if (typeof window !== "undefined") {
+                localStorage.setItem("cartItems", JSON.stringify(updatedCart));
+            }
+
+        return updatedCart;
+        })
+    }
+
+    const value = {items: cartItems, addItem, deleteItem, deleteAllItem, addQuantity, minQuantity}
 
     return <CartContext.Provider value={value}>{children}</CartContext.Provider>
 }

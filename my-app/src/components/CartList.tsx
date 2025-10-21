@@ -14,7 +14,7 @@ type productDetail = {
 
 
 function CartList() {
-  const {items, deleteItem} = useCart();
+  const {items, deleteItem, addQuantity, minQuantity} = useCart();
   const [cartItems, setCartItems] = useState<productDetail[]>([])
   const router = useRouter();
   const {isCartOpen, closeCart} = useToggle();
@@ -67,9 +67,9 @@ return (
 
         <div className="flex justify-between items-center ">
           <div className='w-[40%] border border-gray-300 rounded-sm'>
-            <button className="w-[25%] text-xl hover:bg-gray-200">−</button>
+            <button onClick={()=>minQuantity(item.id)}  className="w-[25%] text-xl hover:bg-gray-200">−</button>
             <span className="w-[50%] inline-block text-center text-xl font-semibold border-x border-gray-300"> {item.quantity} </span>
-            <button  className="w-[25%] text-xl hover:bg-gray-200">+</button>
+            <button onClick={()=>addQuantity(item.id)} className="w-[25%] text-xl hover:bg-gray-200">+</button>
           </div>
 
           
