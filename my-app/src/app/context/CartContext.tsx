@@ -91,14 +91,17 @@ export function CartProvider({children}:any){
 
     const minQuantity = (cartNumber:number) =>{
        setCartItems((prev)=>{
-        const updatedCart = prev.map((currentItem)=>
-            currentItem.id === cartNumber ?
-            {...currentItem, quantity: (currentItem.quantity || 1) - 1}
-            : currentItem)
+        const updatedCart = prev.map((currentItem)=>{
+            if (currentItem.id === cartNumber )
+                return {...currentItem, quantity: (currentItem.quantity || 1) - 1}
+                else return currentItem
+        })
+
+        .filter((item) => (item.quantity || 0) > 0); //filter dari hasil map
             
-            if (typeof window !== "undefined") {
+        if (typeof window !== "undefined") {
                 localStorage.setItem("cartItems", JSON.stringify(updatedCart));
-            }
+        }
 
         return updatedCart;
         })
