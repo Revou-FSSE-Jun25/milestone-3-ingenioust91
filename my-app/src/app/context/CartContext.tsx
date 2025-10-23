@@ -20,17 +20,24 @@ type cartType = {
 
 const CartContext = createContext<cartType | undefined>(undefined);
 
-export function CartProvider({children}:any){
+export function CartProvider({children, initialItems}:
+{children: React.ReactNode; initialItems?: productDetail[];}){
     const [cartItems, setCartItems] = useState<productDetail[]>([]);
 
-    //ambil data dari local untuk pertama kali
     useEffect(() => {
-      const storedCart = localStorage.getItem("cartItems")
-        if (storedCart) {
-          setCartItems(JSON.parse(storedCart))
-        } else {setCartItems([])}
-    }, [])
+        if (initialItems && initialItems.length > 0) {
+            setCartItems(initialItems)
+        return
+        }
 
+        //ambil data dari local
+        const storedCart = localStorage.getItem("cartItems")
+        if (storedCart) {
+            setCartItems(JSON.parse(storedCart))
+        } else {
+            setCartItems([])
+        }
+    }, [initialItems])
 
     const addItem = (items : productDetail) => {
         setCartItems((prev)=>{

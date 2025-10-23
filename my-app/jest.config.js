@@ -8,7 +8,6 @@ module.exports = {
     '^.+\\.(ts|tsx|js|jsx)$': 'ts-jest',
   },
 
-  // ✅ Tambahkan ini
   globals: {
     'ts-jest': {
       useESM: true,

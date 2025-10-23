@@ -65,8 +65,8 @@ function Header() {
           <button data-testid="cart" onClick={openCart} className="w-[15%] cursor-pointer"><img src ="/img/cart.png"/></button>
         </div>
     </header>
-    {isCartOpen &&
-    <CartList/>}
+
+    <CartList/>
     </>
   )
 }

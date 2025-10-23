@@ -14,7 +14,6 @@ export const ToggleProvider = ({children}:any) => {
 
     function openCart() {
         setIsCartOpen(true)
-        console.log('buka!')
     }
 
     function closeCart() {
