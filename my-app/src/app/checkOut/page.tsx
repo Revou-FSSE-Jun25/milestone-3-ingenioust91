@@ -1,7 +1,7 @@
 "use client"
 import React from 'react'
 import { useState, useEffect } from 'react'
-import ProductCart from '@/app/productdetail/[id]/ProductCart'
+import ProductCart from '@/components/ProductCart'
 import { useForm } from "react-hook-form";
 import { useCart } from '../context/CartContext';
 import { useRouter } from 'next/navigation';
@@ -11,6 +11,7 @@ type productDetail = {
     title : string;
     price : number;
     images : string;
+    quantity? : number;
 }
 
 type InputForm = {
@@ -31,7 +32,7 @@ function checkOutPage() {
         setCartItems(items)
     }, [items])
 
-    const subtotal = cartItems.reduce((sum, i) => sum + i.price, 0);
+    const subtotal = cartItems.reduce((sum, i) => sum + i.price*(i.quantity|| 1), 0);
 
     function onSubmitInput(data:InputForm){
         alert(`Thank you ${data.name},
@@ -46,7 +47,12 @@ return (
     <div className='flex lg:flex-row p-[2%] justify-center'>
         <div className='w-full lg:w-[30%] flex flex-col gap-4 p-[2%]'>
             { cartItems.map((item) => (
-                <ProductCart key={item.id} id={item.id} title={item.title} price={item.price} images={item.images}/>))
+                <div  key={item.id}>
+                  <ProductCart id={item.id} title={item.title} price={item.price} images={item.images}/>
+                  <p>Quantity : {item.quantity}</p>
+                </div>
+            ))
+
             }
             
             <hr/>

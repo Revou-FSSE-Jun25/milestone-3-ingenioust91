@@ -1,6 +1,6 @@
 import Link from "next/link"
 
-function Footer() {
+export default function Footer() {
   return (
     <section id="connectSection" className="flex flex-col gap-y-2 w-full bg-black text-white p-[4%] lg:p-[2%_8%]">
       <div className='flex flex-col lg:flex-row justify-between items-center'>
@@ -31,5 +31,3 @@ function Footer() {
     </section>
   )
 }
-
-export default Footer

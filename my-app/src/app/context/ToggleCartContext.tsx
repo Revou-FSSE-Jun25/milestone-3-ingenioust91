@@ -23,7 +23,7 @@ export const ToggleProvider = ({children}:any) => {
 
     const value = {isCartOpen, openCart, closeCart}
 
-    return <ToggleContext value={value}>{children}</ToggleContext>
+    return <ToggleContext.Provider value={value}>{children}</ToggleContext.Provider>
 }
 
 export const useToggle = () => {

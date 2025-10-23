@@ -7,7 +7,7 @@ type productDetail = {
     images : string;
 }
 
-function ProductCart({id, title, price, images }: productDetail) {
+export default function ProductCart({id, title, price, images }: productDetail) {
   return (
     <div className='flex flex-row gap-x-2'>
         <div className='w-[40%]'>
@@ -22,5 +22,3 @@ function ProductCart({id, title, price, images }: productDetail) {
     </div>
   )
 }
-
-export default ProductCart

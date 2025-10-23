@@ -62,7 +62,7 @@ function Header() {
             />
             <button className="w-[22%]" type="submit"><img className="inline-block" src ="/img/search.png"/></button>
           </form>
-          <button onClick={openCart} className="w-[15%] cursor-pointer"><img src ="/img/cart.png"/></button>
+          <button data-testid="cart" onClick={openCart} className="w-[15%] cursor-pointer"><img src ="/img/cart.png"/></button>
         </div>
     </header>
     {isCartOpen &&
