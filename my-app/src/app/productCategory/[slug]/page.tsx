@@ -2,13 +2,14 @@ import React from 'react'
 import Card from '@/components/Card';
 import { categoryFetch } from '@/lib/api';
 import NotFound from '@/app/NotFound';
-import { use } from "react";
 
 // regenerate tiap 1 menit
 export const revalidate = 60;
 
-async function ProductList({ params }: { params: { slug: string } }) {
-    const {slug} = params;
+type Params = Promise<{ slug: string }>
+
+async function ProductList(props: { params: Params }) {
+    const {slug} = await props.params;
     const data = await categoryFetch(slug);
 
     if (!data || data.length === 0) return NotFound();

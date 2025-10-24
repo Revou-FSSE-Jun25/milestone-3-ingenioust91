@@ -10,8 +10,10 @@ export const dynamicParams = true;
 // regenerate tiap 5 menit
 export const revalidate = 300;
 
-async function ProductDetailPage({ params }: { params: { id: string } }) {
-  const {id} = params;
+type Params = Promise<{ id: string }>
+
+async function ProductDetailPage(props: { params: Params }) {
+  const {id} = await props.params;
   const product = await getProduct(id);
 
   if (!product || !product.id) return NotFound();
