@@ -13,7 +13,6 @@
 - Add items to the shopping cart
 - Manage products through the admin panel
 - Server-Side Rendering (SSR) for better SEO  
-- Client-Side Rendering (CSR) for admin interactions  
 
 ---
 
@@ -30,8 +29,9 @@
 ### 3. **Card**
 - Displays individual product information including **image**, **title**, and **price**.
 
-### 5. **AddToCart**
+### 5. **Cart List**
 - Container for managing products added to the shopping cart.
+- User can add/reduce quantity, and delete item from cart.
 
 ### 6. **ProductCart**
 - Displays the **image**, **title**, **ID**, and **price** of items inside the cart.
@@ -54,6 +54,7 @@
 
 ### 5. **Admin**
 - Admin homepage, serving as the entry point for the admin panel.
+- There's authentification before enter this page. User should log in with registered email and password.
 
 ### 6. **InputPage**
 - To input and manage product data.
@@ -66,18 +67,6 @@
 
 ---
 
-## Rendering Strategy
-
-| Page | Rendering Type | Description |
-|------|----------------|-------------|
-| Home | **SSR** | Server-Side Rendering for fast loading and SEO |
-| Product Category | **SSR** | Category-based product filtering |
-| Product Detail | **CSR** | Dynamic product detail loading |
-| Admin Panel | **CSR** | Client-Side Rendering for real-time admin interactions |
-| FAQ | **SSG** | Static Site Generation, only render HTML |
-
----
-
 ## Tech Stack
 
 - **Framework:** Next.js (App Router)
@@ -85,12 +74,15 @@
 - **Language:** TypeScript
 - **State Management:** React Hooks & Local Storage
 - **API:** [Platzi Fake Store API](https://fakeapi.platzi.com/)
+- **TEST:** Jest, React Testing Library
 
 ---
 
-## What's for Update
-- **Cart:** add quantity and product with same key should be combine
-- **Admin:** add log in page
+## Testing
+
+- 
+
+---
 
 =======
 ## Author
