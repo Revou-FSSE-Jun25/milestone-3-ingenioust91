@@ -6,13 +6,7 @@ import NotFound from '@/app/NotFound';
 // regenerate tiap 1 menit
 export const revalidate = 60;
 
-interface PageProps {
-  params: {
-    slug: string;
-  };
-}
-
-async function ProductList({ params }: PageProps) {
+async function ProductList({ params }: { params: { slug: string } }) {
     const slug = params.slug;
     const data = await categoryFetch(slug);
 

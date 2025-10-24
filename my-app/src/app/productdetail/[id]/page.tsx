@@ -10,13 +10,7 @@ export const dynamicParams = true;
 // regenerate tiap 5 menit
 export const revalidate = 300;
 
-interface PageProps {
-  params: {
-    id: string;
-  };
-}
-
-async function ProductDetailPage({ params }: PageProps) {
+async function ProductDetailPage({ params }: { params: { id: string } }) {
   const id = params.id;
   const product = await getProduct(id);
 
