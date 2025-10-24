@@ -15,9 +15,9 @@ export default function ProductCart({id, title, price, images }: productDetail) 
         </div>
         
         <div className='w-[40%]'>
-          <p className='text-sm'>Id: {id}</p>
-          <h2 className='text-base/5'>{title}</h2>
-          <h2>${price}</h2>
+          <p data-testid='idProduct' className='text-sm'>Id: {id}</p>
+          <h2 data-testid='title' className='text-base/5'>{title}</h2>
+          <h2 data-testid='price'>${price}</h2>
         </div>
     </div>
   )

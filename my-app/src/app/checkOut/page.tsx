@@ -22,7 +22,7 @@ type InputForm = {
     address: string;
 }
 
-function checkOutPage() {
+export default function CheckOutPage() {
     const [cartItems, setCartItems] = useState<productDetail[]>([])
     const { register, handleSubmit, formState: {errors} } = useForm<InputForm>();
     const {items, deleteAllItem} = useCart();
@@ -47,13 +47,11 @@ return (
     <div className='flex lg:flex-row p-[2%] justify-center'>
         <div className='w-full lg:w-[30%] flex flex-col gap-4 p-[2%]'>
             { cartItems.map((item) => (
-                <div  key={item.id}>
+                <div key={item.id}>
                   <ProductCart id={item.id} title={item.title} price={item.price} images={item.images}/>
                   <p>Quantity : {item.quantity}</p>
                 </div>
-            ))
-
-            }
+            ))}
             
             <hr/>
             <div className='flex flex-row justify-between'>
@@ -66,42 +64,42 @@ return (
       <div className='w-full lg:w-[40%]'>
         <form onSubmit={handleSubmit(onSubmitInput)} className='flex flex-col items-center gap-4 p-[2%]'>
           <div className='w-full'>
-            <label>Name</label><br/>
+            <label>Name<br/>
             <input type="text" className='inputStyle'
               placeholder='Full Name'
               {...register("name", {
               required : "name required",
               minLength: { value: 3, message: 'Name must be at least 3 characters' }
               })}
-            />
-            {errors.name && <p className="text-red-400 text-sm mt-1">{errors.name.message}</p>}
+            /></label>
+            {errors.name && <p data-testid='nameError' className="text-red-400 text-sm mt-1">{errors.name.message}</p>}
           </div>
 
           <div className='w-full'>
-            <label>Email</label><br/>
+            <label>Email<br/>
             <input type="email" className='inputStyle'
               placeholder='Email'
               {...register("email", {
               required : "email required",
               })}
-            />
-            {errors.email && <p className="text-red-400 text-sm mt-1">{errors.email.message}</p>}
+            /></label>
+            {errors.email && <p data-testid='emailError' className="text-red-400 text-sm mt-1">{errors.email.message}</p>}
           </div>
 
           <div className='w-full'>
-            <label>Phone*</label><br/>
+            <label>Phone*<br/>
             <input type="number" className='inputStyle'
               placeholder='Phone number'
               {...register("phone", {
               required : "phone required",
               valueAsNumber: true,
               })}
-            />
-            {errors.phone && <p className="text-red-400 text-sm mt-1">{errors.phone.message}</p>}
+            /></label>
+            {errors.phone && <p data-testid='phoneError' className="text-red-400 text-sm mt-1">{errors.phone.message}</p>}
           </div>
 
           <div className='w-full'>
-            <label>Payment Method</label><br/>
+            <label>Payment Method<br/>
             <select className='inputStyle h-[57%]'
             {...register("paymentMethod", {
               required : "payment required",
@@ -110,15 +108,15 @@ return (
               <option value="banktransfer">Bank Transfer</option>
               <option value="qris">QRIS</option>
               <option value="ewallet">E-Wallet</option>
-            </select>
+            </select></label>
           </div>
 
           <div className='w-full'>
-            <label>Address</label><br/>
+            <label>Address<br/>
             <textarea className='inputStyle'
               placeholder='Address'
               {...register("address",)}
-            />
+            /></label>
           </div>
 
         <button className='cursor-pointer w-full h-[50px] text-xl buttonAdmin'>PAY NOW</button>
@@ -128,5 +126,3 @@ return (
     </>
   )
 }
-
-export default checkOutPage
