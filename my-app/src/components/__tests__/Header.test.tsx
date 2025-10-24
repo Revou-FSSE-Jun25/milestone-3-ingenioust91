@@ -12,11 +12,10 @@ const mockItems = [
   { id: 1, title: 'Produk A', price: 10000, images: 'https://coba.id/112.jpg', quantity:1 },
 ];
 
+const pushMock = jest.fn();
 jest.mock('next/navigation', () => ({
   useRouter: () => ({
-    push: jest.fn(),
-    replace: jest.fn(),
-    prefetch: jest.fn(),
+    push: pushMock,
   }),
 }));
 
@@ -124,7 +123,47 @@ describe('Header', ()=>{
             expect(cartSideBar).toHaveClass('translate-x-full');
             expect(cartBackDrop).toHaveClass('opacity-0', 'invisible');
         });
-});
+    });
+
+    it('search bar will focused while submit with no-text', async ()=>{
+        render(
+            <ToggleProvider>
+            <CartProvider initialItems={mockItems}>
+                <Header />
+            </CartProvider>
+            </ToggleProvider>
+        );
+
+        const user = userEvent.setup();
+        const searchBar = screen.getByTestId('input');
+        const searchButton = screen.getByTestId('search');
+
+        await user.click(searchButton);
+
+        expect(searchBar).toHaveFocus();
+
+    })
+
+    it('search will run according to user input', async()=>{
+        render(
+            <ToggleProvider>
+            <CartProvider initialItems={mockItems}>
+                <Header />
+            </CartProvider>
+            </ToggleProvider>
+        );
+
+        
+
+        const user = userEvent.setup();
+        const searchBar = screen.getByTestId('input');
+        const searchButton = screen.getByTestId('search');
+
+        await user.type(searchBar, 'laptop');
+        await user.click(searchButton);
+
+        expect(pushMock).toHaveBeenCalledWith('/productSearch/laptop')
+    })
 
     
 })

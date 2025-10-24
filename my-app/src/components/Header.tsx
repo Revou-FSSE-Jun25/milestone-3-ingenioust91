@@ -55,12 +55,12 @@ function Header() {
 
         <div className='flex flex-row gap-[2%] w-[50%] lg:w-[25%] right-0 justify-end'>
           <form onSubmit={handleSubmit(onSubmitFunction)} className="w-[75%]">
-            <input className="h-[70%] w-[75%] pl-[2%] bg-gray-200" type="search" placeholder="SEARCH"
+            <input data-testid="input" className="h-[70%] w-[75%] pl-[2%] bg-gray-200" type="search" placeholder="SEARCH"
             {...register("searchQuery", {
               required : "searchQuery required",
             })}
             />
-            <button className="w-[22%]" type="submit"><img className="inline-block" src ="/img/search.png"/></button>
+            <button data-testid="search" className="w-[22%]" type="submit"><img className="inline-block" src ="/img/search.png"/></button>
           </form>
           <button data-testid="cart" onClick={openCart} className="w-[15%] cursor-pointer"><img src ="/img/cart.png"/></button>
         </div>
