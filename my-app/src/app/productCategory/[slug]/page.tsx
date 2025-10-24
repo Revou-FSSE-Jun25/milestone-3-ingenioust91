@@ -7,8 +7,8 @@ import { use } from "react";
 // regenerate tiap 1 menit
 export const revalidate = 60;
 
-async function ProductList({params}: {params: Promise<{ slug: string }>}) {
-    const { slug } = use(params);
+async function ProductList({ params }: { params: { slug: string } }) {
+    const {slug} = params;
     const data = await categoryFetch(slug);
 
     if (!data || data.length === 0) return NotFound();

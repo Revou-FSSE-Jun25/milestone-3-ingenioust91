@@ -3,7 +3,6 @@ import { getProduct } from '@/lib/api';
 import ImageCard from './ImageCard';
 import NotFound from '@/app/NotFound';
 import ButtonAddToCart from '@/app/productdetail/[id]/ButtonAddToCart';
-import { use } from "react";
 
 // bikin halaman on-demand
 export const dynamicParams = true;
@@ -11,8 +10,8 @@ export const dynamicParams = true;
 // regenerate tiap 5 menit
 export const revalidate = 300;
 
-async function ProductDetailPage({params}: {params: Promise<{ id: string }>}) {
-  const { id } = use(params);
+async function ProductDetailPage({ params }: { params: { id: string } }) {
+  const {id} = params;
   const product = await getProduct(id);
 
   if (!product || !product.id) return NotFound();
