@@ -2,7 +2,7 @@ import React from 'react'
 import { getProduct } from '@/lib/api';
 import ImageCard from './ImageCard';
 import NotFound from '@/app/NotFound';
-import ButtonAddToCart from '@/app/productdetail/[id]/ButtonAddToCart';
+import ButtonAddToCart from './ButtonAddToCart';
 
 // bikin halaman on-demand
 export const dynamicParams = true;

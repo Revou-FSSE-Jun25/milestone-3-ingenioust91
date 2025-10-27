@@ -1,7 +1,7 @@
 "use client"
 import React from 'react'
 import { useCart } from '@/app/context/CartContext';
-import CartList from '../../../components/CartList';
+import CartList from '@/components/CartList';
 import { useToggle } from '@/app/context/ToggleCartContext';
 
 type itemCart = {

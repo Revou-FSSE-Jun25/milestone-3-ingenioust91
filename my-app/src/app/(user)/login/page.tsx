@@ -10,7 +10,7 @@ type LogInForm = {
     password : string,
 }
 
-function loginPage() {
+function LoginPage() {
     const { register, handleSubmit, reset, formState: {errors} } = useForm<LogInForm>();
     const router = useRouter();
 
@@ -70,4 +70,4 @@ return (
   )
 }
 
-export default loginPage
+export default LoginPage

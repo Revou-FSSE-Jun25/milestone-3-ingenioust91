@@ -3,7 +3,7 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import ProductCart from '@/components/ProductCart'
 import { useForm } from "react-hook-form";
-import { useCart } from '../context/CartContext';
+import { useCart } from '../../context/CartContext';
 import { useRouter } from 'next/navigation';
 
 type productDetail = {
@@ -42,7 +42,7 @@ export default function CheckOutPage() {
     }
 
 return (
-    <>
+    <div className="mt-[12%] lg:mt-[6%]">
     <h1 className='text-2xl text-center h-[10%]'><strong>CHECK OUT PAGE</strong></h1>
     <div className='flex lg:flex-row p-[2%] justify-center'>
         <div className='w-full lg:w-[30%] flex flex-col gap-4 p-[2%]'>
@@ -123,6 +123,6 @@ return (
         </form>
       </div>
     </div>
-    </>
+    </div>
   )
 }

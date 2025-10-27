@@ -2,7 +2,7 @@
 import React from 'react'
 import { useRouter } from "next/navigation";
 
-function adminPage() {
+function AdminPage() {
     const router = useRouter();
   return (
     <>
@@ -11,9 +11,9 @@ function adminPage() {
         <h1 className='text-center text-2xl'>WELCOME TO ADMIN PANEL</h1>
 
         <div className='h-[30%] flex flex-row items-center justify-center gap-6 '>
-        <button onClick={()=>router.push('/inputPage')} className='buttonAdmin text-2xl p-[2%_5%] h-full'>
+        <button onClick={()=>router.push('/admin/inputPage')} className='buttonAdmin text-2xl p-[2%_5%] h-full'>
             <strong>Input Data</strong></button>
-        <button onClick={()=>router.push('/adminListPage')} className='buttonAdmin text-2xl p-[2%_5%] h-full'>
+        <button onClick={()=>router.push('/admin/adminListPage')} className='buttonAdmin text-2xl p-[2%_5%] h-full'>
             <strong>List Data</strong></button>
         </div>
     </div>
@@ -22,4 +22,4 @@ function adminPage() {
   )
 }
 
-export default adminPage
+export default AdminPage

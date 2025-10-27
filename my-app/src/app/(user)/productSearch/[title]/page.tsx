@@ -35,7 +35,7 @@ function ProductList() {
     
     
   return (
-    <>
+    <div className="mt-[12%] lg:mt-[6%] h-[70vh]">
         <div className="flex flex-row justify-center flex-wrap gap-6 p-[1%]">
           {items.map((item) => (
             <section key={item.id} className='flex flex-col w-[40%] lg:w-[20%] bg-white'>
@@ -43,7 +43,7 @@ function ProductList() {
             </section>
           ))}
         </div>
-    </>
+    </div>
   )
 }
 
