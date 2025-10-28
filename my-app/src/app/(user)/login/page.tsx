@@ -1,9 +1,8 @@
 "use client"
 import React from 'react'
 import { useForm } from "react-hook-form";
-import { login } from '@/lib/api';
 import { useRouter } from 'next/navigation';
-import { setCookie } from '@/lib/auth';
+import { useSession, signIn, signOut } from 'next-auth/react';
 
 type LogInForm = {
     email : string,
@@ -15,23 +14,23 @@ function LoginPage() {
     const router = useRouter();
 
     async function onSubmitInput(data:LogInForm){
-        const userlogin = await login(data.email, data.password);
+      const resultSignIn = await signIn('credentials',{
+        email : data.email,
+        password : data.password,
+        redirect: false
+      })
 
-        if (!userlogin){
-          alert('email atau password salah')
-          reset();
-          router.push(`/login`)
-        } 
-        
-        alert('log in berhasil')
-        setCookie('access_token', userlogin.accessToken, 30);
-        setCookie('refresh_token', userlogin.accessToken, 30);
-        setCookie('user-data', JSON.stringify(userlogin), 30); //simpan hasil fetch dari userlogin ke user-data
-        router.push(`/admin`);
+      if (resultSignIn?.ok) {
+        router.replace("/admin")
+      } else {
+        alert("Email / password salah");
+        reset();
+      }
+
     }
 
 return (
-    <div className='flex flex-col justify-center items-center h-[70vh]'>
+    <div className='flex flex-col justify-center items-center h-[70vh] mt-[12%] lg:mt-[6%]'>
     <div className='flex flex-col lg:w-[30%] w-[80%] gap-2 shadow-2xl bg-white rounded-xl lg:p-[3%] p-[10%_3%]'>
         <div>
           <p><b>Welcome back</b></p>

@@ -77,7 +77,7 @@ export async function deleteProduct(id:number){
 
 }
 
-export async function login(email: string, password:string){
+export async function login(email: any, password:any){
   try{
     const response = await fetch(`https://api.escuelajs.co/api/v1/auth/login`,{
       method: "POST",
@@ -88,10 +88,6 @@ export async function login(email: string, password:string){
         expiresInMins: 30, // optional, defaults to 60
       })
     })
-
-    if (!response.ok) {
-      return null
-    }
     return response.json();
   }
   catch(Error:any) {

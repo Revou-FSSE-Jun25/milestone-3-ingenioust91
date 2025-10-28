@@ -1,17 +1,19 @@
 import { NextRequest, NextResponse } from "next/server";
+import { getToken } from "next-auth/jwt";
 
 const privateRoutes = ["/admin", "/inputPage", "/adminListPage"]
 
-export function middleware(req:NextRequest){
+export async function middleware(req:NextRequest){
     const {pathname} = req.nextUrl; //ambil pathname dari URL yang mau diakses oleh user
 
     //ambil token
-    const accessToken = req.cookies.get("access_token")?.value //cookies.get itu bawaan dari nextrequest untuk membaca cookie dari request user
-    const refreshToken = req.cookies.get("refresh_token")?.value // tanda(?) supaya jika tidak ada, hasilnya undefined bukan error
+    const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET, raw: true });
 
-    if (privateRoutes.includes(pathname) && accessToken && refreshToken){
+    if (privateRoutes.includes(pathname) && token){
+        //jika user sudah berhasil login bisa next ke page admin
         return NextResponse.next();
     } else if (privateRoutes.includes(pathname)){
+        //jika belum, akan redirect ke login
         const loginUrl = new URL ("/login", req.url)
         loginUrl.searchParams.set("redirect",pathname)
         return NextResponse.redirect(loginUrl);

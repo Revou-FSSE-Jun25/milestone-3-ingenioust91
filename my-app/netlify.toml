@@ -5,3 +5,8 @@
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
+
+[[redirects]]
+  from = "/login"
+  to = "/admin.html"
+  status = 200

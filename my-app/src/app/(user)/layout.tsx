@@ -1,4 +1,7 @@
-export const metadata = { title: "Admin Panel" };
+export const metadata = { 
+   title: "RevoShop",
+   description: "Revolutioner Shopping Experience",
+};
 import { ToggleProvider } from "../context/ToggleCartContext";
 import { CartProvider } from "../context/CartContext";
 import Header from "@/components/Header";
