@@ -135,3 +135,9 @@ li:hover {
   transform: translateY(-1px);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
 }
+
+#web-animation-api .text-xl {
+  font-size: 1.5rem;
+  color: currentColor;
+  letter-spacing: 0.06em;
+}

@@ -93,4 +93,4 @@ export async function login(email: any, password:any){
   catch(Error:any) {
     throw new Error("Gagal fetch user")
   }
-}
+} 

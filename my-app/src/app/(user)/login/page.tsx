@@ -3,6 +3,8 @@ import React from 'react'
 import { useForm } from "react-hook-form";
 import { useRouter } from 'next/navigation';
 import { useSession, signIn, signOut } from 'next-auth/react';
+import { useState } from 'react';
+import Loading from '@/app/Loading';
 
 type LogInForm = {
     email : string,
@@ -12,20 +14,30 @@ type LogInForm = {
 function LoginPage() {
     const { register, handleSubmit, reset, formState: {errors} } = useForm<LogInForm>();
     const router = useRouter();
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
 
     async function onSubmitInput(data:LogInForm){
-      const resultSignIn = await signIn('credentials',{
-        email : data.email,
-        password : data.password,
-        redirect: false
-      })
+      setLoading(true);
+      setError("");
+      try{
+        const resultSignIn = await signIn('credentials',{
+          email : data.email,
+          password : data.password,
+          redirect: false
+        })
 
-      if (resultSignIn?.ok) {
         router.replace("/admin")
-      } else {
+      }
+      catch{
+        setError("Email / password salah")
         alert("Email / password salah");
         reset();
       }
+      finally{
+        setLoading(false)
+      }
+    
 
     }
 
@@ -64,6 +76,10 @@ return (
            <button className='buttonAdmin w-full p-[2%_5%]'><strong>LOG IN</strong></button>
         
         </form>
+
+        {loading &&
+          <Loading/>
+        }
     </div>
     </div>
   )
