@@ -1,6 +1,7 @@
 "use client"
 import React, {useState} from 'react'
 import { useForm } from "react-hook-form";
+import Page404 from '../../Page404';
 
 type InputForm = {
     id : number;
@@ -13,13 +14,13 @@ type InputForm = {
 
 function inputPage() {
   const { register, handleSubmit, reset, formState: {errors} } = useForm<InputForm>();
-  const [error, setError] = useState(null);
+  const [errorCode, setErrorCode] = useState(0);
   const [loading, setLoading] = useState(true);
 
   async function onSubmitInput(data:InputForm){
     try {
       setLoading(true);    // Set loading to true before fetching
-      setError(null);      // Clear any previous errors
+      setErrorCode(0);      // Clear any previous errors
 
       console.log(data)
 
@@ -39,9 +40,8 @@ function inputPage() {
         })
 
         if (!response.ok) {
-          const errorText = await response.text();
-          console.error("SERVER ERROR:", errorText);
-          throw new Error("post failed");
+          setErrorCode(response.status);
+          return;
         }
 
         const result = await response.json();
@@ -49,10 +49,18 @@ function inputPage() {
         alert('Input Data berhasil')
         reset();
       }
-      catch (e){console.error("ERROR:", e);}
+      catch (e:any){
+        console.error("ERROR:", e);
+      }
       finally{
         setLoading(false)
-        }
+      }
+
+
+  }
+
+  if (errorCode) {
+    return <Page404 message={errorCode}/>
   }
 
   return (

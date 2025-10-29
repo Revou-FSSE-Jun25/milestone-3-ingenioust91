@@ -63,19 +63,23 @@ export async function getProductsAdmin(){
     }
   }
 
-export async function deleteProduct(id:number){
-  try{
-      const response = await fetch(`https://api.escuelajs.co/api/v1/products/${id}`,
-        {method: 'DELETE',})
+export async function deleteProduct(id: number) {
+  try {
+    const response = await fetch(`https://api.escuelajs.co/api/v1/products/${id}`, {
+      method: 'DELETE',
+    });
 
-      if (response.ok) {alert('Berhasil delete Product')}
-      return response.json();
-  }
-  catch(Error:any) {
-    throw new Error("Gagal delete produk")
-  }
+    if (!response.ok) {
+      return { success: false, code: response.status };
+    }
 
+    alert('Berhasil delete Product');
+    return { success: true, code: 200 };
+  } catch (error) {
+    return { success: false, code: 500 };
+  }
 }
+
 
 export async function login(email: any, password:any){
   try{
