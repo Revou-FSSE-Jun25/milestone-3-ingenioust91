@@ -72,7 +72,6 @@ function inputPage() {
           <div className='lg:w-[40%] w-full'>
             <label>Title Product*</label><br/>
             <input type="text" className='inputStyle'
-              placeholder='Title Product'
               {...register("title", {
               required : "title required",
               minLength: { value: 3, message: 'Title must be at least 3 characters' }
@@ -98,7 +97,6 @@ function inputPage() {
           <div className='lg:w-[40%] w-full'>
             <label>Price*</label><br/>
             <input type="number" className='inputStyle'
-              placeholder='Price'
               {...register("price", {
               required : "price required",
               valueAsNumber: true,
@@ -110,7 +108,6 @@ function inputPage() {
           <div className='lg:w-[40%] w-full'>
             <label>Description</label><br/>
             <textarea className='inputStyle'
-              placeholder='Product Description'
               {...register("description",)}
             />
           </div>
