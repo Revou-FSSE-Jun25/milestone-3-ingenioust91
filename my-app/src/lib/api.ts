@@ -70,10 +70,11 @@ export async function deleteProduct(id: number) {
     });
 
     if (!response.ok) {
-      return { success: false, code: response.status };
+      const result = await response.json()
+      return { success: false, message : result.message };
     }
 
-    alert('Berhasil delete Product');
+    alert('Delete Product : SUCCESS');
     return { success: true, code: 200 };
   } catch (error) {
     return { success: false, code: 500 };

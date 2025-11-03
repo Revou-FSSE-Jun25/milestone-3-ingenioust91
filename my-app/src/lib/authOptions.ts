@@ -45,7 +45,7 @@ export const authOptions = {
             return token;
         },
         async session({ session, token }:any) {
-            // Tambahkan accessToken ke session biar bisa dipakai di fetch lain
+            // Tambahkan accessToken ke session biar bisa dipakai di page lain
             session.accessToken = token.accessToken;
             return session;
         },

@@ -22,8 +22,8 @@ function Loading() {
   }, []);
 
   return (
-    <div>
-      <h2 ref={headingRef} className="text-xl font-bold">
+    <div className="absolute z-[999] w-full h-[100vh] flex items-center justify-center">
+      <h2 ref={headingRef} className="text-2xl font-bold">
         LOADING...
       </h2>
     </div>

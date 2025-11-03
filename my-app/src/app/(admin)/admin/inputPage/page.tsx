@@ -1,7 +1,8 @@
 "use client"
 import React, {useState} from 'react'
 import { useForm } from "react-hook-form";
-import Page404 from '../../Page404';
+import Link from 'next/link';
+import Loading from '@/app/Loading';
 
 type InputForm = {
     id : number;
@@ -14,14 +15,14 @@ type InputForm = {
 
 function inputPage() {
   const { register, handleSubmit, reset, formState: {errors} } = useForm<InputForm>();
-  const [errorCode, setErrorCode] = useState(0);
-  const [loading, setLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState<string>('no error');
+  const [loading, setLoading] = useState<boolean>(false);
+  
 
   async function onSubmitInput(data:InputForm){
     try {
       setLoading(true);    // Set loading to true before fetching
-      setErrorCode(0);      // Clear any previous errors
-
+      setErrorMessage('no error');      // Clear any previous errors
       console.log(data)
 
       const response = await fetch('https://api.escuelajs.co/api/v1/products/',
@@ -39,12 +40,13 @@ function inputPage() {
             })
         })
 
+        const result = await response.json();
+
         if (!response.ok) {
-          setErrorCode(response.status);
+          setErrorMessage(result.message);
           return;
         }
 
-        const result = await response.json();
         console.log("RESULT: ", result);
         alert('Input Data berhasil')
         reset();
@@ -55,16 +57,17 @@ function inputPage() {
       finally{
         setLoading(false)
       }
-
-
   }
 
-  if (errorCode) {
-    return <Page404 message={errorCode}/>
+  if (errorMessage !== 'no error') {
+    alert(`FAILED : ${errorMessage}.
+    Please contact support.`);
   }
 
   return (
-    <div className='lg:p-[2%_7%] p-[10%] mt-[12%] lg:mt-[7%] lg:mb-[3%]'>
+    <>{loading && <Loading/>}
+    <div className='relative lg:p-[2%_7%] p-[10%] mt-[12%] lg:mt-[7%] lg:mb-[3%]'>
+      <Link href={`/admin`}>Back to admin Panel</Link>
       <div className='p-[10%] lg:p-[2%] flex flex-col justify-center gap-2 shadow-2xl bg-white rounded-xl'>
         <h1 className='text-2xl text-center h-[10%]'><strong>CREATE NEW PRODUCT</strong></h1>
 
@@ -87,9 +90,9 @@ function inputPage() {
               required : "category required",
               valueAsNumber: true 
               })}>
-              <option value={10}>Clothes</option>
+              <option value={16}>Clothes</option>
               <option value={8}>Furniture</option>
-              <option value={9}>Shoes</option>
+              <option value={19}>Shoes</option>
               <option value={7}>Electronics</option>
             </select>
           </div>
@@ -106,10 +109,12 @@ function inputPage() {
             {errors.price && <p className="text-red-400 text-sm mt-1">{errors.price.message}</p>}
           </div>
           <div className='lg:w-[40%] w-full'>
-            <label>Description</label><br/>
+            <label>Description*</label><br/>
             <textarea className='inputStyle'
-              {...register("description",)}
+              {...register("description", {
+              required : "description required"})}
             />
+            {errors.description && <p className="text-red-400 text-sm mt-1">{errors.description.message}</p>}
           </div>
           <div className='lg:w-[40%] w-full'>
             <label>Images</label><br/>
@@ -133,6 +138,7 @@ function inputPage() {
         </form>
       </div>
     </div>
+    </>
   )
 }
 

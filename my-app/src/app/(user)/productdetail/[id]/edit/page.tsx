@@ -75,7 +75,7 @@ function edit() {
     return (
     <div className='lg:p-[2%_7%] p-[10%] mt-[12%] lg:mt-[7%] lg:mb-[3%]'>
       <div className='p-[10%] lg:p-[2%] flex flex-col justify-center gap-2 shadow-2xl bg-white rounded-xl'>
-        <h1 className='text-2xl text-center h-[10%]'><strong>CREATE NEW PRODUCT</strong></h1>
+        <h1 className='text-2xl text-center h-[10%]'><strong>EDIT PRODUCT</strong></h1>
 
         <form onSubmit={onSubmitInput} className='flex flex-col items-center gap-4'>
           <div className='lg:w-[40%] w-full'>

@@ -4,7 +4,7 @@ import Card from '@/components/Card';
 import Link from 'next/link';
 import { deleteProduct } from '@/lib/api';
 import { useForm } from 'react-hook-form';
-import Page404 from '../../Page404';
+import Loading from '@/app/Loading';
 
 type items = {
     id : number;
@@ -28,7 +28,8 @@ function AdminProductList({initialProducts}:ProductListProps) {
     const [items, setItems] = useState<items[]>([]);
     const [allItems, setAllItems] = useState<items[]>([]);
     const { register, handleSubmit, reset } = useForm<SearchForm>();
-    const [errorCode, setErrorCode] = useState<number | null>(null)
+    const [errorMessage, setErrorMessage] = useState<string>('no error');
+    const [loading, setLoading] = useState<boolean>(false);
     
     useEffect(()=>{
       setItems(initialProducts)
@@ -36,29 +37,40 @@ function AdminProductList({initialProducts}:ProductListProps) {
     },[initialProducts])
 
     async function handleDelete(id:number) {
+        setErrorMessage('no error');
         const isDelete = confirm('Are you sure want to delete this product?')
         
         if (isDelete) {
-            const result = await deleteProduct(id)
+            try{
+                setLoading(true);
+                const result = await deleteProduct(id)
 
-            if(!result.success){
-                setErrorCode(result.code);
-                return;
-            } 
-            
-            setItems(items.filter(items => items.id !== id))
+                if(!result.success){
+                    setErrorMessage(result.message);
+                    return;
+                } 
+
+                setItems(items.filter(items => items.id !== id))
+            }
+            catch(e:any){
+                console.error("ERROR:", e);
+            }
+            finally {
+                setLoading(false)
+            }
         }
     }
 
-    if (errorCode) {
-       return <Page404 message={errorCode}/>
+    if (errorMessage !== 'no error') {
+    alert(`FAILED : ${errorMessage}.
+    Please contact support.`);
     }
 
     function handleCategoryChange(categoryId: number) {
-        if (categoryId==0)
-            {setItems(allItems)}
-        else 
-        {
+        if (categoryId==0){
+            setItems(allItems)
+        }
+        else {
             setItems(allItems.filter(items => items.category.id == categoryId))
         }
     }
@@ -74,6 +86,7 @@ function AdminProductList({initialProducts}:ProductListProps) {
 
 
 return (
+    <>{loading && <Loading/>}
         <div className="flex flex-row justify-center flex-wrap gap-6 p-[1%] mt-[12%] lg:mt-[7%]">
         <form onSubmit={handleSubmit(onSubmitFunction)} className='w-full lg:w-[70%] ml-[100px] lg:ml-0'>
             <input className="w-[50%] lg:w-[95%] h-[5vh] pl-[2%] bg-gray-200" type="search" placeholder="SEARCH"
@@ -113,6 +126,7 @@ return (
             ))}
         </div>
     </div>
+    </>
   )
 }
 
