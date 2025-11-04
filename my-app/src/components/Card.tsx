@@ -1,5 +1,4 @@
-"use client"
-import React, {useState} from "react"
+import React from "react"
 import Link from 'next/link'
 
 type CardProps = {
@@ -10,30 +9,20 @@ type CardProps = {
 }
 
 export default function Card({id, title, price, images }: CardProps) {
-  const [current, setCurrent] = useState(0);
-  
-    const nextImage = () => {
-      setCurrent((prev) => (prev + 1) % images.length); //supaya bisa balik ke 0 kalau udah sampai di imagelength
-    };
-  
-    const prevImage = () => {
-      setCurrent((prev) => (prev - 1 + images.length) % images.length); //supaya bisa balik ke imagelength kalau sudah 0
-    };
-  
 
   return (
-    <section>
-      <div className="text-4xl relative">
-        <i className='cursor-pointer fa fa-angle-left absolute top-[60px] lg:top-[120px] hover:bg-gray-500 p-[2px]' onClick={prevImage}></i>
-        <i className='cursor-pointer fa fa-angle-right absolute right-0 top-[60px] lg:top-[120px] hover:bg-gray-500 p-[2px]' onClick={nextImage}></i>
-      </div>
-
-      <Link data-testid='image' href={`/productdetail/${id}`}>
-        <img alt={title} className="cursor-pointer" src={images[current]}/>
+    <section className="w-full h-full">
+      <Link data-testid='image' href={`/productdetail/${id}`}
+      className="relative w-full block h-[75%]"> 
+        <img alt={title} className="absolute block inset-0 w-full h-full object-cover object-center cursor-pointer transition-opacity duration-500 opacity-100 hover:opacity-0" src={images[0]}/>
+        <img alt={title} className="absolute block inset-0 w-full h-full object-cover object-center cursor-pointer transition-opacity duration-500 opacity-0 hover:opacity-100" src={images[1]}/>
       </Link>
-      <p data-testid='idProduct' className='p-[1%_5%] text-sm'>Product Id: {id}</p>
-      <h1 className='p-[1%_5%] truncate'><b>{title}</b></h1>
-      <h2 className='p-[1%_5%] text-right'><b>$ {price}</b></h2>
+      
+      <div className="m-[2%_5%] ">
+        <p data-testid='idProduct' className='text-sm'>Product Id: {id}</p>
+        <h1 className='truncate'><b>{title}</b></h1>
+        <h2 className='text-right'><b>$ {price}</b></h2>
+      </div>
     </section>
   )
 }
