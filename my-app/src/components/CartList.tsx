@@ -13,16 +13,20 @@ type productDetail = {
     quantity? : number;
 }
 
-
 export default function CartList() {
   const {items, deleteItem, addQuantity, minQuantity} = useCart();
   const [cartItems, setCartItems] = useState<productDetail[]>([])
   const router = useRouter();
   const {isCartOpen, closeCart} = useToggle();
+  const [mounted, setMounted] = useState<boolean>(false)
 
   useEffect(()=>{
     setCartItems(items)
   },[items])
+
+  useEffect(()=>{
+    setMounted(true)
+  },[])
   
   const subtotal = cartItems.reduce((sum, item) => sum + item.price*(item.quantity|| 1), 0);
   let sub : number;
@@ -41,8 +45,7 @@ return (
     <div data-testid='cart-sidebar'
       className={`fixed top-0 right-0 z-[999] lg:w-[25%] w-[85%] min-h-full bg-white p-[2%]
       flex flex-col gap-y-3
-      ${isCartOpen ? "translate-x-0" : "translate-x-full"}`}
-    >
+      ${isCartOpen ? "translate-x-0" : "translate-x-full"}`}>
       <div className="flex flex-row justify-between items-center">
         <h1>
           <strong>CART</strong>
@@ -54,6 +57,12 @@ return (
 
       <hr />
 
+      {mounted && cartItems.length ==0 &&
+        <p className='text-gray-500'>Your cart is currently empty.</p>
+      }
+
+      {cartItems.length !==0 &&
+        <>
       {cartItems.map((item) => (
       <div className='flex flex-col gap-y-1' key={item.id} >
         <div className='flex flex-row items-start'>
@@ -88,9 +97,10 @@ return (
       <hr />
 
       <button onClick={() => {router.push(`/checkOut`); closeCart()}}
-        className="cursor-pointer w-full h-[50px] text-xl buttonAdmin">
+        className='w-full h-[50px] text-xl buttonAdmin'>
         Check Out
       </button>
+      </>}
     </div>
   </>
 );
