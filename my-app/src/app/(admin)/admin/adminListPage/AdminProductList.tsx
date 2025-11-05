@@ -109,12 +109,12 @@ return (
 
         <div className="flex flex-row justify-center flex-wrap gap-6 p-[1%]">
             {items.map((item) => (
-            <section key={item.id} className='flex flex-col w-[40%] lg:w-[20%] bg-white'>
+            <section key={item.id} className='flex flex-col w-[40%] lg:w-[20%] h-[60vh] bg-white'>
                 <Card key={item.id} id={item.id} title={item.title} price={item.price} images={item.images} />
                 
                 <div className='flex flex-row justify-between'>
                     <Link className='cursor-pointer w-[40%] text-center text-lg buttonAdmin'
-                    href={`/productdetail/${item.id}/edit`}>
+                    href={`/admin/productEdit/${item.id}`}>
                     EDIT</Link>
                     
                     <button className='cursor-pointer w-[40%] text-lg buttonDelete'

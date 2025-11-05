@@ -13,12 +13,12 @@ async function ProductList(props: { params: Params }) {
     const data = await categoryFetch(slug);
 
     if (!data || data.length === 0) return NotFound();
-
+ 
   return (
     <div className="mt-[12%] lg:mt-[6%]">
         <div className="flex flex-row justify-center flex-wrap gap-6 p-[1%]">
             {data.map((item:any) => (
-            <section key={item.id} className='flex flex-col w-[40%] lg:w-[20%] bg-white'>
+            <section key={item.id} className='flex flex-col w-full lg:w-[24%] h-[60vh]  bg-white'>
               <Card key={item.id} id={item.id} title={item.title} price={item.price} images={item.images} />
             </section>
           ))}

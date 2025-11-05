@@ -5,7 +5,7 @@ import Footer from '../Footer';
 import {userEvent} from '@testing-library/user-event';
 import mockRouter from "next-router-mock";
 import { MemoryRouterProvider } from 'next-router-mock/MemoryRouterProvider';
-import PolicyPage from '@/app/policy/page';
+import PolicyPage from '@/app/(user)/policy/page';
 
 describe('Footer', ()=>{
     it('Privacy Policy will navigate to /policy',async()=>{
