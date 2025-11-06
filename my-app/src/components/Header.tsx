@@ -30,7 +30,7 @@ function Header() {
           <div className="fixed p-[3%_6%] w-full bg-white z-[999]">
             <ul className='w-[90%] flex flex-col gap-[3%]'>
               <p onClick={()=>setShowBurger(false)} className="text-sm text-right">CLOSE</p>
-              <li><Link href={`/`}>All Items</Link></li>
+              <li><Link href={`/allItems`}>All Items</Link></li>
               <li><Link href={`/productCategory/clothes`}>Clothes</Link></li>
               <li><Link href={`/productCategory/furniture`}>Furniture</Link></li>
               <li><Link href={`/productCategory/shoes`}>Shoes</Link></li>
@@ -46,7 +46,7 @@ function Header() {
         </a>
 
         <ul className='hidden w-[50%] lg:flex flex-row gap-[3%] justify-center items-center'>
-          <li><Link href={`/`}>All Items</Link></li>
+          <li><Link href={`/allItems`}>All Items</Link></li>
           <li><Link href={`/productCategory/clothes`}>Clothes</Link></li>
           <li><Link href={`/productCategory/furniture`}>Furniture</Link></li>
           <li><Link href={`/productCategory/shoes`}>Shoes</Link></li>

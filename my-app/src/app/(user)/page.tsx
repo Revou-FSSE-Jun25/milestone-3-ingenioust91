@@ -6,7 +6,7 @@ import MiniBanner from "@/components/MiniBanner";
 export const revalidate = 60;
  
 export default async function HomePage() {
-  const initialProducts = await getProducts();
+  const initialProducts = await getProducts(0);
   return (
     <div className="mt-[12%] lg:mt-[6%]">
     <img src="/img/main-banner.webp"/>

@@ -12,9 +12,9 @@ export async function getProduct(id:string){
 
 }
 
-export async function getProducts(){
+export async function getProducts(offset : number){
     try{
-      const response = await fetch(`https://api.escuelajs.co/api/v1/products?offset=0&limit=12`, {next: { revalidate: 60 }})
+      const response = await fetch(`https://api.escuelajs.co/api/v1/products?offset=${offset}&limit=12`, {next: { revalidate: 60 }})
 
       if (!response.ok) throw new Error("Gagal fetch produk");
       
