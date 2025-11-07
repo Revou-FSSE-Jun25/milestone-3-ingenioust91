@@ -3,6 +3,8 @@ import React, {useState} from 'react'
 import { useForm } from "react-hook-form";
 import Link from 'next/link';
 import Loading from '@/app/Loading';
+import { getToken } from 'next-auth/jwt';
+import { NextRequest } from 'next/server';
 
 type InputForm = {
     id : number;
@@ -17,7 +19,6 @@ function inputPage() {
   const { register, handleSubmit, reset, formState: {errors} } = useForm<InputForm>();
   const [errorMessage, setErrorMessage] = useState<string>('no error');
   const [loading, setLoading] = useState<boolean>(false);
-  
 
   async function onSubmitInput(data:InputForm){
     try {
@@ -25,10 +26,12 @@ function inputPage() {
       setErrorMessage('no error');      // Clear any previous errors
       console.log(data)
 
-      const response = await fetch('https://api.escuelajs.co/api/v1/products/',
+
+      const response = await fetch('/api/auth/products', //tidak langsung ke API, tapi ganti ke route.ts
         {
           method : "POST",
-          headers : {"Content-Type" : "application/json"},
+          headers : {
+            "Content-Type" : "application/json"},
           body : JSON.stringify ({
               title : data.title,
               price : Number(data.price),
@@ -37,10 +40,12 @@ function inputPage() {
               images : Array.isArray(data.images)
               ? data.images.filter((i) => typeof i === "string" && i.startsWith("http"))
               : [data.images]
-            })
+            }),
+          credentials: 'include', // penting agar cookie dikirim
         })
 
         const result = await response.json();
+        console.log(result);
 
         if (!response.ok) {
           setErrorMessage(result.message);
@@ -90,7 +95,7 @@ function inputPage() {
               required : "category required",
               valueAsNumber: true 
               })}>
-              <option value={16}>Clothes</option>
+              <option value={34}>Clothes</option>
               <option value={8}>Furniture</option>
               <option value={19}>Shoes</option>
               <option value={7}>Electronics</option>

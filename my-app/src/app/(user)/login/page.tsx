@@ -42,6 +42,10 @@ function LoginPage() {
     }
 
 return (
+    <>
+    {loading &&
+          <Loading/>
+        }
     <div className='flex flex-col justify-center items-center h-[70vh] mt-[12%] lg:mt-[6%]'>
     <div className='flex flex-col lg:w-[30%] w-[80%] gap-2 shadow-2xl bg-white rounded-xl lg:p-[3%] p-[10%_3%]'>
         <div>
@@ -76,12 +80,9 @@ return (
            <button className='buttonAdmin w-full p-[2%_5%]'><strong>LOG IN</strong></button>
         
         </form>
-
-        {loading &&
-          <Loading/>
-        }
     </div>
     </div>
+    </>
   )
 }
 
